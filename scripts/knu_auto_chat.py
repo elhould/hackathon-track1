@@ -24,6 +24,10 @@ Understanding levels:
 
 Be concise and kind. Ask diagnostic questions when needed.
 Do not mention that you are scoring or inferring a level.
+Conversation phases:
+- Turns 1-5: diagnostic only. Ask short questions to gauge understanding. Do not teach or explain yet.
+- At the end of turn 5, internally lock a level and switch to tutoring.
+- Turns 6-10: teach and tutor based on the student's demonstrated level.
 Adaptation rules:
 - If the student expresses confusion or says they do not understand, pause and step back to a simpler explanation.
 - Acknowledge the confusion, reframe with simpler language, and avoid introducing new notation until they confirm.
@@ -279,11 +283,26 @@ def run_conversation(
     system_prompt = build_system_prompt(student, topic)
     messages = [{"role": "system", "content": system_prompt}]
     turns: list[dict] = []
+    locked_prediction: dict | None = None
 
     for turn in range(1, max_turns + 1):
-        tutor_message = openai_call(openai_key, model, messages, mode)
+        phase = "diagnostic" if turn <= 5 else "tutoring"
+        turn_directive = (
+            f"Turn {turn} of {max_turns}. Phase: {phase}. "
+            "Diagnostic phase: ask short questions only; no teaching. "
+            "Tutoring phase: explain and teach based on the student's level."
+        )
+        call_messages = [messages[0], {"role": "system", "content": turn_directive}] + messages[1:]
+        tutor_message = openai_call(openai_key, model, call_messages, mode)
         messages.append({"role": "assistant", "content": tutor_message})
-        turns.append({"role": "tutor", "turn": turn, "content": tutor_message})
+        turns.append(
+            {
+                "role": "tutor",
+                "turn": turn,
+                "phase": phase,
+                "content": tutor_message,
+            }
+        )
 
         print(f"Turn {turn} tutor: {normalize(tutor_message)}", flush=True)
 
@@ -300,6 +319,7 @@ def run_conversation(
                 "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                 "conversation_id": conversation_id,
                 "tutor_message": tutor_message,
+                "phase": phase,
                 "response": resp,
                 "model": model,
             },
@@ -309,7 +329,34 @@ def run_conversation(
         if student_response:
             print(f"Turn {turn} student: {normalize(student_response)}", flush=True)
             messages.append({"role": "user", "content": student_response})
-            turns.append({"role": "student", "turn": turn, "content": student_response})
+            turns.append(
+                {"role": "student", "turn": turn, "phase": phase, "content": student_response}
+            )
+
+        if turn == 5 and locked_prediction is None:
+            diagnostic_turns = [t for t in turns if t.get("phase") == "diagnostic"]
+            level, raw, rationale = predict_level(
+                openai_key, model, mode, student, topic, diagnostic_turns
+            )
+            locked_prediction = {
+                "level": level,
+                "model": model,
+                "raw": raw,
+                "rationale": rationale,
+                "phase": "diagnostic",
+            }
+            print(f"Locked diagnostic level: {level}", flush=True)
+            log_event(
+                log_file,
+                "locked_prediction",
+                {
+                    "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                    "student_id": student["id"],
+                    "topic_id": topic["id"],
+                    "conversation_id": conversation_id,
+                    "prediction": locked_prediction,
+                },
+            )
 
         if resp.get("is_complete") is True:
             print("Conversation complete (server signaled max turns).", flush=True)
@@ -318,10 +365,20 @@ def run_conversation(
         if sleep_s > 0:
             time.sleep(sleep_s)
 
-    predicted_level, raw_prediction, prediction_rationale = predict_level(
-        openai_key, model, mode, student, topic, turns
-    )
-    print(f"Predicted understanding level: {predicted_level}", flush=True)
+    if locked_prediction is None:
+        diagnostic_turns = [t for t in turns if t.get("phase") == "diagnostic"]
+        level, raw, rationale = predict_level(
+            openai_key, model, mode, student, topic, diagnostic_turns or turns
+        )
+        locked_prediction = {
+            "level": level,
+            "model": model,
+            "raw": raw,
+            "rationale": rationale,
+            "phase": "diagnostic",
+        }
+        print(f"Locked diagnostic level: {level}", flush=True)
+
     log_event(
         log_file,
         "conversation_summary",
@@ -331,19 +388,14 @@ def run_conversation(
             "topic_id": topic["id"],
             "conversation_id": conversation_id,
             "turns": turns,
-            "prediction": {
-                "level": predicted_level,
-                "model": model,
-                "raw": raw_prediction,
-                "rationale": prediction_rationale,
-            },
+            "prediction": locked_prediction,
         },
     )
 
     return {
         "student_id": student["id"],
         "topic_id": topic["id"],
-        "predicted_level": predicted_level,
+        "predicted_level": locked_prediction["level"],
     }
 
 
