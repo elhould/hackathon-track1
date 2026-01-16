@@ -1,0 +1,41 @@
+{
+  "set_type": "mini_dev",
+  "prompt_version": "B",
+  "model": "gpt-5.2",
+  "generated_at": "2026-01-16T20:58:07Z",
+  "predictions": [
+    {
+      "student_id": "1c6afe74-c388-4eb1-b82e-8326d95e29a3",
+      "topic_id": "b09cd19f-e8f4-4587-96c7-11f2612f8040",
+      "predicted_level": 5,
+      "prompt_version": "B",
+      "model": "gpt-5.2",
+      "rationale": "The student consistently answers correctly, applies slope/intercept concepts and rise-run stepping accurately, and resolves potential sign confusion without persisting misconceptions.",
+      "raw": "{\n  \"level\": 5,\n  \"rationale\": \"The student consistently answers correctly, applies slope/intercept concepts and rise-run stepping accurately, and resolves potential sign confusion without persisting misconceptions.\"\n}"
+    },
+    {
+      "student_id": "2ee4a025-4845-47f4-a634-3c9e423a4b0e",
+      "topic_id": "a8245611-9efd-4810-95b1-f0c93c303fb7",
+      "predicted_level": 3,
+      "prompt_version": "B",
+      "model": "gpt-5.2",
+      "rationale": "After initial confusion, the student correctly factors and solves several quadratics (including sign handling) with only minor uncertainty and needs guidance for non-monic cases.",
+      "raw": "{\n  \"level\": 3,\n  \"rationale\": \"After initial confusion, the student correctly factors and solves several quadratics (including sign handling) with only minor uncertainty and needs guidance for non-monic cases.\"\n}"
+    },
+    {
+      "student_id": "2b9da93c-5616-49ca-999c-a894b9d004a3",
+      "topic_id": "bebd9c5a-617b-4d88-94cf-642e0675c9dc",
+      "predicted_level": 5,
+      "prompt_version": "B",
+      "model": "gpt-5.2",
+      "rationale": "The student consistently gives correct, self-driven explanations and extensions (freeze-out, variable gamma, entropy link, JT/inversion temperature, vdW approximation) with no persistent misconceptions.",
+      "raw": "{\n  \"level\": 5,\n  \"rationale\": \"The student consistently gives correct, self-driven explanations and extensions (freeze-out, variable gamma, entropy link, JT/inversion temperature, vdW approximation) with no persistent misconceptions.\"\n}"
+    }
+  ],
+  "mse_response": {
+    "mse_score": 2.6666666666666665,
+    "num_predictions": 3,
+    "submission_number": 9,
+    "submissions_remaining": null
+  }
+}

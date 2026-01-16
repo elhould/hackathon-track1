@@ -75,6 +75,19 @@ Notes:
 - Picks the most recent `conversation_summary` per student/topic pair.
 - Fails if any required pair is missing.
 
+### `scripts/knu_submit_tutoring.py`
+
+Submits a tutoring evaluation request to `/evaluate/tutoring`.
+
+Examples:
+
+```
+./scripts/knu_submit_tutoring.py --set-type mini_dev
+```
+
+Notes:
+- Requires at least one conversation per student/topic pair in the set.
+
 ### `scripts/knu_run_and_submit.sh`
 
 One-shot flow: run conversations, then submit predictions.
@@ -84,6 +97,50 @@ Examples:
 ```
 ./scripts/knu_run_and_submit.sh --set-type mini_dev --model gpt-5.2 --mode responses
 ```
+
+### `scripts/knu_score_only.py`
+
+Runs LLM scoring on existing conversations (no new API conversations) and can
+optionally submit to `/evaluate/mse`.
+
+Examples:
+
+```
+./scripts/knu_score_only.py --prompt-version A
+./scripts/knu_score_only.py --prompt-version B --submit-mse
+./scripts/knu_score_only.py --prompt-version C --set-type mini_dev --mode responses
+```
+
+Notes:
+- Uses the most recent `conversation_summary` per student/topic pair from `logs/conversations.jsonl`.
+- Writes results to `logs/score_only_<version>_<timestamp>.json`.
+
+### `scripts/knu_score_abc.sh`
+
+Runs A/B/C scoring back-to-back and submits each to `/evaluate/mse`.
+
+Examples:
+
+```
+./scripts/knu_score_abc.sh --set-type mini_dev --model gpt-5.2 --mode responses
+```
+
+Notes:
+- Forwards any args to `knu_score_only.py` (except `--prompt-version` and `--submit-mse`).
+
+### `scripts/knu_infer_truth.py`
+
+Infers true levels for `mini_dev` using controlled MSE probes (multiple submissions).
+
+Example:
+
+```
+./scripts/knu_infer_truth.py --set-type mini_dev
+```
+
+Notes:
+- Uses multiple `/evaluate/mse` calls; refuses non-`mini_dev` unless `--force`.
+- Writes inferred levels to `logs/inferred_levels.json`.
 
 ## Logs
 

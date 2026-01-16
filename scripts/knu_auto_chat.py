@@ -24,9 +24,44 @@ Understanding levels:
 
 Be concise and kind. Ask diagnostic questions when needed.
 Do not mention that you are scoring or inferring a level.
+Adaptation rules:
+- If the student expresses confusion or says they do not understand, pause and step back to a simpler explanation.
+- Acknowledge the confusion, reframe with simpler language, and avoid introducing new notation until they confirm.
+- Ask 1 short check question to verify the prerequisite before moving on.
+- If the student answers confidently and correctly, increase difficulty slightly.
+- Always respond to what the student just said; do not continue with a prior equation if they are stuck.
 
 Student: {name}, grade {grade}
 Topic: {topic} ({subject})
+"""
+
+PREDICTION_PROMPT_TEMPLATE = """You are rating a student's understanding level based on a tutoring conversation.
+Use the following general rubric (applies across math/biology/physics/etc):
+
+Level 1 (Struggling): has trouble restating the task; confuses basic terms/notation; cannot start without step-by-step help.
+Level 2 (Below grade): can follow hints; partial steps; frequent mistakes; fragile understanding.
+Level 3 (At grade): solves standard tasks with minor corrections; can explain simply; some errors.
+Level 4 (Above grade): mostly correct and confident; can generalize/apply to new examples; rare gaps.
+Level 5 (Advanced): precise vocabulary used correctly; self-initiates deeper questions; connects concepts.
+
+Behavioral signals to weigh:
+- Reasoning quality (just rules vs explanations)
+- Error patterns (repeated misconceptions vs one-off slips)
+- Metacognition (noticing and fixing mistakes)
+- Transfer (applying to new examples without prompting)
+- Engagement (curiosity, deeper questions)
+
+Return a JSON object with:
+{{
+  "level": <integer 1-5>,
+  "rationale": "<one short sentence>"
+}}
+
+Student: {name}, grade {grade}
+Topic: {topic} ({subject})
+
+Conversation:
+{transcript}
 """
 
 
@@ -156,23 +191,22 @@ def predict_level(
     student: dict,
     topic: dict,
     turns: list[dict],
-) -> tuple[int, str]:
+) -> tuple[int, str, str]:
     transcript_lines = []
     for entry in turns:
         role = entry.get("role", "").capitalize()
         content = entry.get("content", "")
         transcript_lines.append(f"{role}: {content}")
 
-    prompt = (
-        "You are evaluating a tutoring conversation. "
-        "Estimate the student's understanding level for the topic. "
-        "Return a single integer from 1 to 5 and nothing else.\n\n"
-        f"Student: {student.get('name')} (grade {student.get('grade_level')})\n"
-        f"Topic: {topic.get('name')} ({topic.get('subject_name')})\n\n"
-        "Conversation:\n" + "\n".join(transcript_lines)
+    prompt = PREDICTION_PROMPT_TEMPLATE.format(
+        name=student.get("name", "Student"),
+        grade=student.get("grade_level", "?"),
+        topic=topic.get("name", "Topic"),
+        subject=topic.get("subject_name", "Subject"),
+        transcript="\n".join(transcript_lines),
     )
     messages = [
-        {"role": "system", "content": "You output only a single integer from 1 to 5."},
+        {"role": "system", "content": "Return only valid JSON. No extra text."},
         {"role": "user", "content": prompt},
     ]
     raw = openai_call(
@@ -181,12 +215,30 @@ def predict_level(
         messages,
         mode,
         temperature=0.0,
-        max_tokens=16,
+        max_tokens=200,
     )
-    match = re.search(r"\b([1-5])\b", raw.strip())
-    if match:
-        return int(match.group(1)), raw
-    return 3, raw
+    raw_str = raw.strip()
+    level = None
+    rationale = ""
+    try:
+        data = json.loads(raw_str)
+        level_val = data.get("level")
+        if isinstance(level_val, str) and level_val.isdigit():
+            level_val = int(level_val)
+        if isinstance(level_val, (int, float)) and 1 <= int(level_val) <= 5:
+            level = int(level_val)
+        rationale_val = data.get("rationale")
+        if isinstance(rationale_val, str):
+            rationale = rationale_val.strip()
+    except json.JSONDecodeError:
+        pass
+    if level is None:
+        match = re.search(r"\b([1-5])\b", raw_str)
+        if match:
+            level = int(match.group(1))
+    if level is None:
+        level = 3
+    return level, raw_str, rationale
 
 
 def run_conversation(
@@ -266,7 +318,7 @@ def run_conversation(
         if sleep_s > 0:
             time.sleep(sleep_s)
 
-    predicted_level, raw_prediction = predict_level(
+    predicted_level, raw_prediction, prediction_rationale = predict_level(
         openai_key, model, mode, student, topic, turns
     )
     print(f"Predicted understanding level: {predicted_level}", flush=True)
@@ -283,6 +335,7 @@ def run_conversation(
                 "level": predicted_level,
                 "model": model,
                 "raw": raw_prediction,
+                "rationale": prediction_rationale,
             },
         },
     )
