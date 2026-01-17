@@ -10,7 +10,7 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 
-PROMPT_A = """You are rating a student's understanding level based on a tutoring conversation.
+PROMPT_A = """You are rating a student's understanding level based on student-only responses.
 Use the following general rubric (applies across math/biology/physics/etc):
 
 Level 1 (Struggling): has trouble restating the task; confuses basic terms/notation; cannot start without step-by-step help.
@@ -25,6 +25,8 @@ Behavioral signals to weigh:
 - Metacognition (noticing and fixing mistakes)
 - Transfer (applying to new examples without prompting)
 - Engagement (curiosity, deeper questions)
+- Be strict: if there are fundamental errors or repeated misconceptions, do not rate above Level 2.
+- If answers are vague or off-topic, count them as incorrect.
 
 Return a JSON object with:
 {{
@@ -35,17 +37,19 @@ Return a JSON object with:
 Student: {name}, grade {grade}
 Topic: {topic} ({subject})
 
-Conversation:
+Student responses only:
 {transcript}
 """
 
-PROMPT_B = """You are rating a student's understanding level based on a tutoring conversation.
+PROMPT_B = """You are rating a student's understanding level based on student-only responses.
 Focus on correctness, consistency, and misconceptions. Ignore tone/enthusiasm.
 
 Scoring focus:
 - Are answers correct without hints?
 - Are errors repeated or corrected after feedback?
 - Do misconceptions persist across multiple turns?
+- Be strict: if fundamental misconceptions persist, cap at Level 2.
+- If the student cannot restate basic ideas, lean lower.
 
 Rubric (general across subjects):
 1: cannot start; core terms/symbols misunderstood; frequent incorrect answers.
@@ -63,17 +67,18 @@ Return JSON only:
 Student: {name}, grade {grade}
 Topic: {topic} ({subject})
 
-Conversation:
+Student responses only:
 {transcript}
 """
 
-PROMPT_C = """You are rating a student's understanding level based on a tutoring conversation.
+PROMPT_C = """You are rating a student's understanding level based on student-only responses.
 Focus on reasoning depth, transfer, and self-correction.
 
 Scoring focus:
 - Explains "why" or links concepts, not just procedures.
 - Applies ideas to new examples without prompting.
 - Notices and fixes mistakes independently.
+- Be strict: shallow or inconsistent reasoning should not score above Level 3.
 
 Rubric (general across subjects):
 1: minimal reasoning; cannot connect steps to ideas.
@@ -91,7 +96,7 @@ Return JSON only:
 Student: {name}, grade {grade}
 Topic: {topic} ({subject})
 
-Conversation:
+Student responses only:
 {transcript}
 """
 
@@ -218,15 +223,50 @@ def pick_latest_conversations(log_file: Path) -> dict[tuple[str, str], dict]:
     return {k: v[0] for k, v in latest.items()}
 
 
-def build_transcript(turns: list[dict]) -> str:
+def pick_latest_conversations_from_dir(log_dir: Path) -> dict[tuple[str, str], dict]:
+    latest = {}
+    if not log_dir.exists():
+        return latest
+    for path in sorted(log_dir.glob("*.jsonl")):
+        for idx, line in enumerate(path.read_text(encoding="utf-8").splitlines()):
+            if not line.strip():
+                continue
+            try:
+                entry = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if entry.get("event") != "conversation_summary":
+                continue
+            student_id = entry.get("student_id")
+            topic_id = entry.get("topic_id")
+            if not student_id or not topic_id:
+                continue
+            ts_val = parse_ts(entry.get("ts"))
+            key = (student_id, topic_id)
+            if key in latest:
+                _, existing_ts, existing_idx = latest[key]
+                if ts_val is not None and existing_ts is not None:
+                    if ts_val <= existing_ts:
+                        continue
+                elif ts_val is None and existing_ts is None:
+                    if idx <= existing_idx:
+                        continue
+                elif ts_val is None and existing_ts is not None:
+                    continue
+            latest[key] = (entry, ts_val, idx)
+    return {k: v[0] for k, v in latest.items()}
+
+
+def build_transcript(turns: list[dict], diagnostic_only: bool) -> str:
     lines = []
     for t in turns:
+        if diagnostic_only and t.get("phase") != "diagnostic":
+            continue
         role = t.get("role")
         content = t.get("content", "")
-        if role == "tutor":
-            lines.append(f"Tutor: {content}")
-        elif role == "student":
-            lines.append(f"Student: {content}")
+        if role == "student":
+            turn_no = t.get("turn", "?")
+            lines.append(f"Student (turn {turn_no}): {content}")
     return "\n".join(lines)
 
 
@@ -249,13 +289,14 @@ def score_conversation(
     student: dict,
     topic: dict,
     turns: list[dict],
+    diagnostic_only: bool,
 ) -> tuple[int, str, str]:
     prompt = select_prompt(prompt_version).format(
         name=student.get("name", "Student"),
         grade=student.get("grade_level", "?"),
         topic=topic.get("name", "Topic"),
         subject=topic.get("subject_name", "Subject"),
-        transcript=build_transcript(turns),
+        transcript=build_transcript(turns, diagnostic_only),
     )
     messages = [
         {"role": "system", "content": "Return only valid JSON. No extra text."},
@@ -317,6 +358,8 @@ def main() -> int:
     parser.add_argument("--model", default="gpt-5.2", help="OpenAI model name")
     parser.add_argument("--mode", default="responses", help="OpenAI API mode: responses|chat")
     parser.add_argument("--log-file", default=None, help="Path to conversations.jsonl")
+    parser.add_argument("--log-dir", default=None, help="Path to a directory of JSONL logs")
+    parser.add_argument("--diagnostic-only", action="store_true", help="Score only diagnostic turns")
     parser.add_argument("--out", default=None, help="Output JSON path")
     parser.add_argument("--submit-mse", action="store_true", help="Submit to /evaluate/mse")
     args = parser.parse_args()
@@ -328,8 +371,12 @@ def main() -> int:
     if not openai_key:
         raise SystemExit("Missing env var: OPENAI_API_KEY")
 
-    log_file = Path(args.log_file) if args.log_file else repo_root / "logs/conversations.jsonl"
-    conversations = pick_latest_conversations(log_file)
+    if args.log_dir:
+        log_dir = Path(args.log_dir)
+        conversations = pick_latest_conversations_from_dir(log_dir)
+    else:
+        log_file = Path(args.log_file) if args.log_file else repo_root / "logs/conversations.jsonl"
+        conversations = pick_latest_conversations(log_file)
     if not conversations:
         raise SystemExit("No conversation_summary entries found in logs.")
 
@@ -348,7 +395,7 @@ def main() -> int:
         topic = {"id": topic_id, "name": convo.get("topic_name"), "subject_name": convo.get("subject_name")}
         turns = convo.get("turns", [])
         level, raw, rationale = score_conversation(
-            openai_key, args.model, args.mode, args.prompt_version, student, topic, turns
+            openai_key, args.model, args.mode, args.prompt_version, student, topic, turns, args.diagnostic_only
         )
         predictions.append(
             {

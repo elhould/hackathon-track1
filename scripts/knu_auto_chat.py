@@ -10,36 +10,129 @@ from urllib.request import Request, urlopen
 from urllib.parse import urlencode
 
 
-SYSTEM_PROMPT_TEMPLATE = """You are an AI tutor in the Knowunity challenge.
-Goals:
-- Infer the student's understanding level (1-5) from the conversation.
-- Provide personalized tutoring adapted to their understanding and personality.
+TUTORING_SYSTEM_PROMPT = """You are an AI tutor in the Knowunity challenge, working with German Gymnasium students.
 
-Understanding levels:
-1 = Struggling (needs fundamentals)
-2 = Below grade (frequent mistakes)
-3 = At grade (core concepts OK)
-4 = Above grade (occasional gaps)
-5 = Advanced (ready for more)
+===== YOUR MISSION =====
+1. Infer the student's understanding level (1-5) through strategic conversation
+2. Provide personalized tutoring adapted to their level and learning style
+3. Build rapport while gathering diagnostic evidence
 
-Be concise and kind. Ask diagnostic questions when needed.
-Do not mention that you are scoring or inferring a level.
-Conversation phases:
-- Turns 1-5: diagnostic only. Ask short questions to gauge understanding. Do not teach or explain yet.
-- At the end of turn 5, internally lock a level and switch to tutoring.
-- Turns 6-10: teach and tutor based on the student's demonstrated level.
-Adaptation rules:
-- If the student expresses confusion or says they do not understand, pause and step back to a simpler explanation.
-- Acknowledge the confusion, reframe with simpler language, and avoid introducing new notation until they confirm.
-- Ask 1 short check question to verify the prerequisite before moving on.
-- If the student answers confidently and correctly, increase difficulty slightly.
-- Always respond to what the student just said; do not continue with a prior equation if they are stuck.
+===== UNDERSTANDING LEVELS =====
+Level 1 = Struggling – needs fundamentals, confused by basic concepts
+Level 2 = Below grade – frequent mistakes, gaps in prerequisites
+Level 3 = At grade – core concepts OK, can solve standard problems
+Level 4 = Above grade – occasional gaps, handles complexity well
+Level 5 = Advanced – ready for extensions, makes connections independently
 
-Student: {name}, grade {grade}
+===== CONVERSATION STRUCTURE =====
+
+**TURN 1 (Opening Survey)**
+Your first message MUST follow this exact structure:
+
+---
+Hi {name}! 👋 Willkommen! I'm here to help you with {topic}.
+
+**What we'll explore today:**
+In this session, we'll work through {topic} concepts together. I want to understand where you are right now, then help you build or deepen your knowledge step by step.
+
+**Quick check-in:**
+1. How comfortable do you feel with {topic} right now? (e.g., "never heard of it", "a bit familiar", "pretty confident")
+2. What have you already learned or tried about this topic?
+
+**Let's see what you know:**
+I'll ask you 3 quick questions to understand your starting point:
+
+**Question 1 (Basic):** [Insert simple recall/definition question]
+**Question 2 (Intermediate):** [Insert application/conceptual question]
+**Question 3 (Advanced):** [Insert analysis/synthesis question]
+
+Take your time! Just answer what you can – it's totally fine if some are tricky. 😊
+---
+
+**Turns 2-5: Diagnostic Phase**
+- ONLY ask follow-up diagnostic questions
+- Probe depth of understanding based on Turn 1 responses
+- Use student's language and examples
+- DO NOT teach or explain yet – gather evidence only
+- Ask questions that reveal: accuracy, reasoning process, misconceptions, prerequisite knowledge
+
+**At end of Turn 5:**
+- Internally commit to a level (1-5) based on accumulated evidence
+- DO NOT mention the level to the student
+
+**Turns 6-10: Tutoring Phase**
+- Switch to teaching mode adapted to the inferred level
+- Provide explanations, examples, and practice suited to their needs
+- Continue to adjust if new evidence emerges
+
+===== ADAPTATION RULES =====
+
+**If student shows confusion:**
+- Immediately pause and acknowledge: "I see that was tricky – let me break it down differently."
+- Step back to simpler language/smaller chunks
+- Check prerequisite: Ask 1 short question to verify foundation before continuing
+- Wait for confirmation before moving forward
+
+**If student shows confidence + correctness:**
+- Gradually increase difficulty
+- Introduce related concepts or extensions
+- Ask "why" and "what if" questions
+
+**If student is off-topic or stuck:**
+- Don't continue with your planned question/equation
+- Address what they just said directly
+- Redirect gently: "Let me help with that first, then we'll connect it to..."
+
+**Personality adaptation:**
+- For uncertain students: Be extra encouraging, celebrate small wins
+- For confident students: Challenge appropriately, ask deeper questions
+- For confused students: Slow down, use analogies, relate to familiar concepts
+
+===== DIAGNOSTIC QUESTION DESIGN =====
+
+**Level 1 Detection (Struggling):**
+- Cannot define basic terms
+- Confused by simplest examples
+- Shows no prior exposure
+
+**Level 2 Detection (Below Grade):**
+- Recalls some terms but mixes them up
+- Makes systematic errors
+- Struggles with prerequisites
+
+**Level 3 Detection (At Grade):**
+- Handles standard problems correctly
+- Explains core concepts adequately
+- Makes occasional minor errors
+
+**Level 4 Detection (Above Grade):**
+- Solves problems efficiently
+- Explains reasoning clearly
+- Handles non-routine questions
+
+**Level 5 Detection (Advanced):**
+- Makes connections to other topics spontaneously
+- Proposes alternative approaches
+- Asks insightful questions
+
+===== STYLE GUIDELINES =====
+- Be warm, encouraging, and concise (2-4 sentences per response typically)
+- Use the student's name occasionally
+- Mix German and English naturally (match student's language preference)
+- Never say: "I'm assessing you" or "This will determine your level"
+- Frame everything as collaborative learning
+- Use emojis sparingly (1-2 per message max)
+
+===== CONTEXT =====
+Student: {name}, Grade {grade}
 Topic: {topic} ({subject})
+Turn: {turn} of {max_turns}
+
+===== YOUR RESPONSE =====
+[Your message to the student]
 """
 
-PREDICTION_PROMPT_TEMPLATE = """You are rating a student's understanding level based on a tutoring conversation.
+PREDICTION_PROMPT_TEMPLATE = """You are rating a student's understanding level based on student-only responses.
 Use the following general rubric (applies across math/biology/physics/etc):
 
 Level 1 (Struggling): has trouble restating the task; confuses basic terms/notation; cannot start without step-by-step help.
@@ -54,7 +147,8 @@ Behavioral signals to weigh:
 - Metacognition (noticing and fixing mistakes)
 - Transfer (applying to new examples without prompting)
 - Engagement (curiosity, deeper questions)
-- If there are glaring fundamental issues (basic symbols/notation or task meaning), be stricter and lean lower.
+- Be strict: if there are fundamental issues (basic symbols/notation or task meaning), do not rate above Level 2.
+- If responses are vague or off-topic, count them as incorrect.
 
 Return a JSON object with:
 {{
@@ -65,7 +159,7 @@ Return a JSON object with:
 Student: {name}, grade {grade}
 Topic: {topic} ({subject})
 
-Conversation:
+Student responses only:
 {transcript}
 """
 
@@ -180,12 +274,110 @@ def api_post(base_url: str, api_key: str, path: str, payload: dict) -> dict:
     return http_json("POST", f"{base_url}{path}", headers, payload)
 
 
-def build_system_prompt(student: dict, topic: dict) -> str:
-    return SYSTEM_PROMPT_TEMPLATE.format(
+def build_system_prompt(student: dict, topic: dict, turn: int, max_turns: int) -> str:
+    return TUTORING_SYSTEM_PROMPT.format(
         name=student.get("name", "Student"),
         grade=student.get("grade_level", "?"),
         topic=topic.get("name", "Topic"),
         subject=topic.get("subject_name", "Subject"),
+        turn=turn,
+        max_turns=max_turns,
+    )
+
+
+CONFUSION_MARKERS = (
+    "dont understand",
+    "don't understand",
+    "do not understand",
+    "idk",
+    "no idea",
+    "not sure",
+    "i dont know",
+    "i don't know",
+    "i am lost",
+    "im lost",
+    "confused",
+)
+
+HEDGE_MARKERS = ("maybe", "i think", "i guess", "not sure", "unsure")
+REASON_MARKERS = ("because", "so that", "therefore", "since", "so", "means", "reason")
+
+
+def estimate_level(turns: list[dict]) -> int:
+    score = 0
+    recent = [t for t in turns if t.get("role") == "student"][-3:]
+    for t in recent:
+        text = (t.get("content") or "").lower()
+        if any(m in text for m in CONFUSION_MARKERS):
+            score -= 2
+        if any(m in text for m in HEDGE_MARKERS):
+            score -= 1
+        if any(m in text for m in REASON_MARKERS):
+            score += 1
+        if "wait" in text or "actually" in text:
+            score += 1  # self-correction signal
+        if any(ch.isdigit() for ch in text):
+            score += 1  # uses numeric detail
+    if score <= -3:
+        return 1
+    if score <= -1:
+        return 2
+    if score <= 1:
+        return 3
+    if score <= 3:
+        return 4
+    return 5
+
+
+def build_strategy_directive(
+    turn: int,
+    max_turns: int,
+    phase: str,
+    topic: dict,
+    turns: list[dict],
+) -> str:
+    if turn == 1:
+        return (
+            "Adaptive strategy: Follow the TURN 1 Opening Survey structure exactly. "
+            "Include the 3 questions labeled Basic/Intermediate/Advanced. "
+            "Do not add extra questions beyond those three."
+        )
+    last_student = next((t for t in reversed(turns) if t.get("role") == "student"), None)
+    last_text = (last_student.get("content") if last_student else "") or ""
+    last_text_l = last_text.lower()
+    confusion = any(m in last_text_l for m in CONFUSION_MARKERS)
+    estimated_level = estimate_level(turns)
+
+    if phase == "diagnostic":
+        if confusion:
+            guidance = (
+                "If the student is confused, acknowledge it and give ONE short clarification, "
+                "then ask ONE simple check question."
+            )
+        else:
+            guidance = (
+                "Ask at most TWO short diagnostic questions. Require a brief reason for one."
+            )
+    else:
+        if confusion:
+            guidance = (
+                "Start by resolving the confusion from the last turn in 2-3 sentences, "
+                "then ask ONE focused check question."
+            )
+        elif estimated_level >= 4:
+            guidance = (
+                "Ask a transfer or 'why' question to probe depth. Require a 1-sentence justification."
+            )
+        else:
+            guidance = (
+                "Give a concise explanation, then ask ONE practice question plus a short reason."
+            )
+
+    return (
+        "Adaptive strategy: "
+        f"turn={turn}/{max_turns}, phase={phase}, "
+        f"topic={topic.get('name','')}, estimated_level={estimated_level}. "
+        f"{guidance} Avoid long lectures and always respond to the last student message."
     )
 
 
@@ -199,9 +391,11 @@ def predict_level(
 ) -> tuple[int, str, str]:
     transcript_lines = []
     for entry in turns:
-        role = entry.get("role", "").capitalize()
+        if entry.get("role") != "student":
+            continue
         content = entry.get("content", "")
-        transcript_lines.append(f"{role}: {content}")
+        turn_no = entry.get("turn", "?")
+        transcript_lines.append(f"Student (turn {turn_no}): {content}")
 
     prompt = PREDICTION_PROMPT_TEMPLATE.format(
         name=student.get("name", "Student"),
@@ -281,19 +475,38 @@ def run_conversation(
         flush=True,
     )
 
-    system_prompt = build_system_prompt(student, topic)
+    system_prompt = build_system_prompt(student, topic, 1, max_turns)
     messages = [{"role": "system", "content": system_prompt}]
     turns: list[dict] = []
     locked_prediction: dict | None = None
 
     for turn in range(1, max_turns + 1):
+        messages[0]["content"] = build_system_prompt(student, topic, turn, max_turns)
         phase = "diagnostic" if turn <= 5 else "tutoring"
-        turn_directive = (
-            f"Turn {turn} of {max_turns}. Phase: {phase}. "
-            "Diagnostic phase: ask short questions only; no teaching. "
-            "Tutoring phase: explain and teach based on the student's level."
+        if turn == 1:
+            turn_directive = (
+                f"Turn {turn} of {max_turns}. Phase: {phase}. "
+                "Follow the TURN 1 Opening Survey structure exactly. "
+                "Ask exactly 3 questions labeled Basic/Intermediate/Advanced."
+            )
+        else:
+            turn_directive = (
+                f"Turn {turn} of {max_turns}. Phase: {phase}. "
+                "Diagnostic phase: ask short questions only; no teaching. "
+                "Tutoring phase: explain and teach based on the student's level."
+            )
+        strategy_directive = build_strategy_directive(
+            turn=turn,
+            max_turns=max_turns,
+            phase=phase,
+            topic=topic,
+            turns=turns,
         )
-        call_messages = [messages[0], {"role": "system", "content": turn_directive}] + messages[1:]
+        call_messages = [
+            messages[0],
+            {"role": "system", "content": turn_directive},
+            {"role": "system", "content": strategy_directive},
+        ] + messages[1:]
         tutor_message = openai_call(openai_key, model, call_messages, mode)
         messages.append({"role": "assistant", "content": tutor_message})
         turns.append(
@@ -407,6 +620,8 @@ def main() -> int:
     parser.add_argument("--mode", default="responses", help="OpenAI API mode: responses|chat")
     parser.add_argument("--sleep", type=float, default=0.2, help="Sleep between turns (seconds)")
     parser.add_argument("--max-turns", type=int, default=None, help="Cap turns per conversation")
+    parser.add_argument("--student-id", default=None, help="Run only this student_id")
+    parser.add_argument("--topic-id", default=None, help="Run only this topic_id")
     parser.add_argument(
         "--submit-mse",
         action="store_true",
@@ -445,11 +660,15 @@ def main() -> int:
     predictions: list[dict] = []
 
     for student in students:
+        if args.student_id and student.get("id") != args.student_id:
+            continue
         topics_resp = api_get(base_url, team_api_key, f"/students/{student['id']}/topics")
         topics = topics_resp.get("topics", [])
         if not topics:
             continue
         for topic in topics:
+            if args.topic_id and topic.get("id") != args.topic_id:
+                continue
             pred = run_conversation(
                 base_url,
                 team_api_key,
@@ -463,6 +682,9 @@ def main() -> int:
                 args.max_turns,
             )
             predictions.append(pred)
+
+    if (args.student_id or args.topic_id) and not predictions:
+        raise SystemExit("No conversations matched the given --student-id/--topic-id filters.")
 
     if args.submit_mse:
         if not predictions:

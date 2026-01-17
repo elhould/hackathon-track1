@@ -98,6 +98,47 @@ Examples:
 ./scripts/knu_run_and_submit.sh --set-type mini_dev --model gpt-5.2 --mode responses
 ```
 
+### `scripts/knu_list_pairs.py`
+
+Lists student/topic pairs for a set (one pair per line, space-separated).
+
+Examples:
+
+```
+./scripts/knu_list_pairs.py --set-type dev
+```
+
+### `scripts/knu_run_dev_parallel.sh`
+
+Runs all dev student-topic pairs in parallel and writes logs per pair.
+
+Examples:
+
+```
+PARALLEL=4 LOG_DIR=new_logs ./scripts/knu_run_dev_parallel.sh
+```
+
+Notes:
+- Uses `scripts/knu_list_pairs.py` to enumerate dev pairs.
+- Writes one JSONL log per pair to `new_logs/`.
+- You can set `MODEL`, `MODE`, `SLEEP`, or `MAX_TURNS` via env vars.
+
+### `scripts/knu_run_eval_parallel.sh`
+
+Runs all eval student-topic pairs in parallel, writes logs per pair, scores with strict
+student-only diagnostic scoring, and submits to `/evaluate/mse`.
+
+Examples:
+
+```
+PARALLEL=4 LOG_DIR=eval_logs ./scripts/knu_run_eval_parallel.sh
+```
+
+Notes:
+- Uses `scripts/knu_list_pairs.py` to enumerate eval pairs.
+- Writes one JSONL log per pair to `eval_logs/`.
+- Scoring uses `scripts/knu_score_only.py --diagnostic-only`.
+
 ### `scripts/knu_score_only.py`
 
 Runs LLM scoring on existing conversations (no new API conversations) and can
