@@ -2,11 +2,19 @@
 import argparse
 import json
 import os
+import ssl
 from pathlib import Path
 from datetime import datetime
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+
+# Fix SSL certificate verification on macOS
+try:
+    import certifi
+    SSL_CONTEXT = ssl.create_default_context(cafile=certifi.where())
+except ImportError:
+    SSL_CONTEXT = ssl.create_default_context()
 
 
 def load_env_file(env_path: Path) -> dict:
@@ -32,7 +40,7 @@ def http_json(method: str, url: str, headers: dict, payload: dict | None = None)
         data = json.dumps(payload).encode("utf-8")
     req = Request(url, data=data, method=method, headers=headers)
     try:
-        with urlopen(req, timeout=60) as resp:
+        with urlopen(req, timeout=60, context=SSL_CONTEXT) as resp:
             body = resp.read().decode("utf-8")
             return json.loads(body) if body else {}
     except HTTPError as e:
@@ -161,11 +169,17 @@ def main() -> int:
         )
 
     payload = {"set_type": args.set_type, "predictions": payload_preds}
+    
+    # Always print payload information as requested
+    print("Preparing to submit payload:", flush=True)
+    print(json.dumps(payload, ensure_ascii=True, indent=2), flush=True)
+
     if args.dry_run:
-        print(json.dumps(payload, ensure_ascii=True, indent=2))
         return 0
 
+    print("\nSubmitting to API...", flush=True)
     resp = api_post(base_url, team_api_key, "/evaluate/mse", payload)
+    print("Response:", flush=True)
     print(json.dumps(resp, ensure_ascii=True, indent=2))
     return 0
 

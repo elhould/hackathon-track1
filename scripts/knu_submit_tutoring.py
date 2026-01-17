@@ -2,9 +2,17 @@
 import argparse
 import json
 import os
+import ssl
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+
+# Fix SSL certificate verification on macOS
+try:
+    import certifi
+    SSL_CONTEXT = ssl.create_default_context(cafile=certifi.where())
+except ImportError:
+    SSL_CONTEXT = ssl.create_default_context()
 
 
 def load_env_file(env_path: Path) -> dict:
@@ -30,7 +38,8 @@ def http_json(method: str, url: str, headers: dict, payload: dict | None = None)
         data = json.dumps(payload).encode("utf-8")
     req = Request(url, data=data, method=method, headers=headers)
     try:
-        with urlopen(req, timeout=60) as resp:
+        # Increased timeout for tutoring evaluation (needs time to evaluate all conversations)
+        with urlopen(req, timeout=300, context=SSL_CONTEXT) as resp:
             body = resp.read().decode("utf-8")
             return json.loads(body) if body else {}
     except HTTPError as e:
