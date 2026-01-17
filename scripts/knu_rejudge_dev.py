@@ -9,7 +9,9 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
-from knu_prompts import get_score_only_prompt
+from knu_prompts import get_rejudge_prompt
+
+
 
 
 def load_env_file(env_path: Path) -> dict:
@@ -51,7 +53,7 @@ def openai_call(
     messages: list[dict],
     mode: str,
     temperature: float = 0.0,
-    max_tokens: int = 200,
+    max_tokens: int = 250,
 ) -> str:
     headers = {
         "Authorization": f"Bearer {api_key}",
@@ -89,6 +91,19 @@ def openai_call(
     raise RuntimeError(f"Unexpected OpenAI response: {resp}")
 
 
+def api_get(base_url: str, api_key: str, path: str, query: dict | None = None) -> dict:
+    url = f"{base_url}{path}"
+    if query:
+        url += "?" + urlencode(query)
+    headers = {"Content-Type": "application/json", "x-api-key": api_key}
+    return http_json("GET", url, headers)
+
+
+def api_post(base_url: str, api_key: str, path: str, payload: dict) -> dict:
+    headers = {"Content-Type": "application/json", "x-api-key": api_key}
+    return http_json("POST", f"{base_url}{path}", headers, payload)
+
+
 def parse_ts(ts: str | None) -> float | None:
     if not ts:
         return None
@@ -101,11 +116,9 @@ def parse_ts(ts: str | None) -> float | None:
             return None
 
 
-def pick_latest_conversations(log_file: Path) -> dict[tuple[str, str], dict]:
+def pick_latest_conversations(path: Path) -> dict[tuple[str, str], dict]:
     latest = {}
-    if not log_file.exists():
-        return latest
-    for idx, line in enumerate(log_file.read_text(encoding="utf-8").splitlines()):
+    for idx, line in enumerate(path.read_text(encoding="utf-8").splitlines()):
         if not line.strip():
             continue
         try:
@@ -138,6 +151,8 @@ def build_transcript(turns: list[dict]) -> str:
     lines = []
     for t in turns:
         role = t.get("role")
+        if t.get("phase") != "diagnostic":
+            continue
         content = t.get("content", "")
         if role == "tutor":
             lines.append(f"Tutor: {content}")
@@ -146,63 +161,28 @@ def build_transcript(turns: list[dict]) -> str:
     return "\n".join(lines)
 
 
-def score_conversation(
-    openai_key: str,
-    model: str,
-    mode: str,
-    prompt_version: str,
-    student: dict,
-    topic: dict,
-    turns: list[dict],
-) -> tuple[int, str, str]:
-    prompt = get_score_only_prompt(prompt_version).format(
-        name=student.get("name", "Student"),
-        grade=student.get("grade_level", "?"),
-        topic=topic.get("name", "Topic"),
-        subject=topic.get("subject_name", "Subject"),
-        transcript=build_transcript(turns),
-    )
-    messages = [
-        {"role": "system", "content": "Return only valid JSON. No extra text."},
-        {"role": "user", "content": prompt},
-    ]
-    raw = openai_call(openai_key, model, messages, mode, temperature=0.0, max_tokens=200)
+def parse_rejudge(raw: str, current_level: int) -> tuple[bool, int, str]:
     raw_str = raw.strip()
-    level = None
-    rationale = ""
+    agree = True
+    final_level = current_level
+    reasoning = ""
     try:
         data = json.loads(raw_str)
-        level_val = data.get("level")
-        if isinstance(level_val, str) and level_val.isdigit():
-            level_val = int(level_val)
-        if isinstance(level_val, (int, float)) and 1 <= int(level_val) <= 5:
-            level = int(level_val)
-        rationale_val = data.get("rationale")
-        if isinstance(rationale_val, str):
-            rationale = rationale_val.strip()
+        if isinstance(data, dict):
+            agree_val = data.get("agree")
+            if isinstance(agree_val, bool):
+                agree = agree_val
+            level_val = data.get("final_level")
+            if isinstance(level_val, str) and level_val.isdigit():
+                level_val = int(level_val)
+            if isinstance(level_val, (int, float)) and 1 <= int(level_val) <= 5:
+                final_level = int(level_val)
+            reasoning_val = data.get("reasoning")
+            if isinstance(reasoning_val, str):
+                reasoning = reasoning_val.strip()
     except json.JSONDecodeError:
         pass
-    if level is None:
-        for ch in raw_str:
-            if ch in "12345":
-                level = int(ch)
-                break
-    if level is None:
-        level = 3
-    return level, raw_str, rationale
-
-
-def api_get(base_url: str, api_key: str, path: str, query: dict | None = None) -> dict:
-    url = f"{base_url}{path}"
-    if query:
-        url += "?" + urlencode(query)
-    headers = {"Content-Type": "application/json", "x-api-key": api_key}
-    return http_json("GET", url, headers)
-
-
-def api_post(base_url: str, api_key: str, path: str, payload: dict) -> dict:
-    headers = {"Content-Type": "application/json", "x-api-key": api_key}
-    return http_json("POST", f"{base_url}{path}", headers, payload)
+    return agree, final_level, reasoning
 
 
 def required_pairs(base_url: str, api_key: str, set_type: str) -> list[tuple[str, str]]:
@@ -216,27 +196,27 @@ def required_pairs(base_url: str, api_key: str, set_type: str) -> list[tuple[str
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Score existing conversations with LLM only.")
-    parser.add_argument("--set-type", default="mini_dev", help="mini_dev|dev|eval")
-    parser.add_argument("--prompt-version", default="A", help="A|B|C")
+    parser = argparse.ArgumentParser(
+        description="Rejudge dev conversations against existing scores using diagnostic turns only."
+    )
+    parser.add_argument("--input", default="dev_conversations.jsonl", help="Input JSONL path")
+    parser.add_argument("--set-type", default="dev", help="mini_dev|dev|eval")
+    parser.add_argument("--prompt-version", default="A", help="A|B|C|D|E")
     parser.add_argument("--model", default="gpt-5.2", help="OpenAI model name")
     parser.add_argument("--mode", default="responses", help="OpenAI API mode: responses|chat")
-    parser.add_argument("--log-file", default=None, help="Path to conversations.jsonl")
     parser.add_argument("--out", default=None, help="Output JSON path")
     parser.add_argument("--submit-mse", action="store_true", help="Submit to /evaluate/mse")
     args = parser.parse_args()
 
     repo_root = Path(__file__).resolve().parents[1]
     env_file = load_env_file(repo_root / ".env")
-
     openai_key = get_env("OPENAI_API_KEY", env_file)
     if not openai_key:
-        raise SystemExit("Missing env var: OPENAI_API_KEY")
+        raise SystemExit("Missing OPENAI_API_KEY")
 
-    log_file = Path(args.log_file) if args.log_file else repo_root / "logs/conversations.jsonl"
-    conversations = pick_latest_conversations(log_file)
-    if not conversations:
-        raise SystemExit("No conversation_summary entries found in logs.")
+    input_path = Path(args.input)
+    if not input_path.exists():
+        raise SystemExit(f"Input file not found: {input_path}")
 
     base_url = get_env("BASE_URL", env_file) or ""
     team_api_key = get_env("TEAM_API_KEY", env_file) or ""
@@ -244,36 +224,55 @@ def main() -> int:
         raise SystemExit("Missing BASE_URL or TEAM_API_KEY for submit.")
     base_url = base_url.rstrip("/")
 
-    timestamp = time.strftime("%Y%m%d_%H%M%S", time.gmtime())
-    out_path = Path(args.out) if args.out else repo_root / f"logs/score_only_{args.prompt_version.lower()}_{timestamp}.json"
+    conversations = pick_latest_conversations(input_path)
+    if not conversations:
+        raise SystemExit("No conversation_summary entries found.")
 
+    results = []
     predictions = []
     for (student_id, topic_id), convo in conversations.items():
-        student = {"id": student_id, "name": convo.get("student_name"), "grade_level": convo.get("student_grade")}
-        topic = {"id": topic_id, "name": convo.get("topic_name"), "subject_name": convo.get("subject_name")}
-        turns = convo.get("turns", [])
-        level, raw, rationale = score_conversation(
-            openai_key, args.model, args.mode, args.prompt_version, student, topic, turns
+        pred = convo.get("prediction", {})
+        current_level = pred.get("level")
+        if not isinstance(current_level, (int, float)):
+            continue
+        current_level = int(current_level)
+        transcript = build_transcript(convo.get("turns", []))
+        prompt = get_rejudge_prompt(args.prompt_version).format(
+            current_level=current_level, transcript=transcript
+        )
+        messages = [
+            {"role": "system", "content": "Return only valid JSON. No extra text."},
+            {"role": "user", "content": prompt},
+        ]
+        raw = openai_call(openai_key, args.model, messages, args.mode)
+        agree, final_level, reasoning = parse_rejudge(raw, current_level)
+        results.append(
+            {
+                "student_id": student_id,
+                "topic_id": topic_id,
+                "current_level": current_level,
+                "final_level": final_level,
+                "agree": agree,
+                "reasoning": reasoning,
+                "raw": raw,
+            }
         )
         predictions.append(
             {
                 "student_id": student_id,
                 "topic_id": topic_id,
-                "predicted_level": level,
-                "prompt_version": args.prompt_version.upper(),
-                "model": args.model,
-                "rationale": rationale,
-                "raw": raw,
+                "predicted_level": final_level,
             }
         )
-        print(f"{student_id} {topic_id} -> {level}", flush=True)
+        print(f"{student_id} {topic_id}: {current_level} -> {final_level} (agree={agree})", flush=True)
 
     output = {
         "set_type": args.set_type,
         "prompt_version": args.prompt_version.upper(),
+        "phase": "diagnostic",
         "model": args.model,
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "predictions": predictions,
+        "results": results,
     }
 
     if args.submit_mse:
@@ -286,23 +285,22 @@ def main() -> int:
             raise SystemExit(
                 "Missing predictions for these student/topic pairs:\n" + missing_str
             )
-        payload_preds = [
-            {
-                "student_id": p["student_id"],
-                "topic_id": p["topic_id"],
-                "predicted_level": p["predicted_level"],
-            }
-            for p in predictions
-        ]
         resp = api_post(
             base_url,
             team_api_key,
             "/evaluate/mse",
-            {"set_type": args.set_type, "predictions": payload_preds},
+            {"set_type": args.set_type, "predictions": predictions},
         )
         output["mse_response"] = resp
         print(json.dumps(resp, ensure_ascii=True, indent=2), flush=True)
 
+    timestamp = time.strftime("%Y%m%d_%H%M%S", time.gmtime())
+    out_path = (
+        Path(args.out)
+        if args.out
+        else repo_root
+        / f"logs/dev_rejudge_{args.prompt_version.lower()}_{timestamp}.json"
+    )
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(output, ensure_ascii=True, indent=2), encoding="utf-8")
     print(f"Saved: {out_path}", flush=True)

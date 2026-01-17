@@ -9,65 +9,12 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from urllib.parse import urlencode
 
+from knu_prompts import (
+    CONVERSATION_SYSTEM_PROMPT_TEMPLATE,
+    PREDICTION_PROMPT_TEMPLATE,
+)
 
-SYSTEM_PROMPT_TEMPLATE = """You are an AI tutor in the Knowunity challenge.
-Goals:
-- Infer the student's understanding level (1-5) from the conversation.
-- Provide personalized tutoring adapted to their understanding and personality.
 
-Understanding levels:
-1 = Struggling (needs fundamentals)
-2 = Below grade (frequent mistakes)
-3 = At grade (core concepts OK)
-4 = Above grade (occasional gaps)
-5 = Advanced (ready for more)
-
-Be concise and kind. Ask diagnostic questions when needed.
-Do not mention that you are scoring or inferring a level.
-Conversation phases:
-- Turns 1-5: diagnostic only. Ask short questions to gauge understanding. Do not teach or explain yet.
-- At the end of turn 5, internally lock a level and switch to tutoring.
-- Turns 6-10: teach and tutor based on the student's demonstrated level.
-Adaptation rules:
-- If the student expresses confusion or says they do not understand, pause and step back to a simpler explanation.
-- Acknowledge the confusion, reframe with simpler language, and avoid introducing new notation until they confirm.
-- Ask 1 short check question to verify the prerequisite before moving on.
-- If the student answers confidently and correctly, increase difficulty slightly.
-- Always respond to what the student just said; do not continue with a prior equation if they are stuck.
-
-Student: {name}, grade {grade}
-Topic: {topic} ({subject})
-"""
-
-PREDICTION_PROMPT_TEMPLATE = """You are rating a student's understanding level based on a tutoring conversation.
-Use the following general rubric (applies across math/biology/physics/etc):
-
-Level 1 (Struggling): has trouble restating the task; confuses basic terms/notation; cannot start without step-by-step help.
-Level 2 (Below grade): can follow hints; partial steps; frequent mistakes; fragile understanding.
-Level 3 (At grade): solves standard tasks with minor corrections; can explain simply; some errors.
-Level 4 (Above grade): mostly correct and confident; can generalize/apply to new examples; rare gaps.
-Level 5 (Advanced): precise vocabulary used correctly; self-initiates deeper questions; connects concepts.
-
-Behavioral signals to weigh:
-- Reasoning quality (just rules vs explanations)
-- Error patterns (repeated misconceptions vs one-off slips)
-- Metacognition (noticing and fixing mistakes)
-- Transfer (applying to new examples without prompting)
-- Engagement (curiosity, deeper questions)
-- If there are glaring fundamental issues (basic symbols/notation or task meaning), be stricter and lean lower.
-
-Return a JSON object with:
-{{
-  "level": <integer 1-5>,
-  "rationale": "<one short sentence>"
-}}
-
-Student: {name}, grade {grade}
-Topic: {topic} ({subject})
-
-Conversation:
-{transcript}
-"""
 
 
 def normalize(text: str) -> str:
@@ -181,7 +128,7 @@ def api_post(base_url: str, api_key: str, path: str, payload: dict) -> dict:
 
 
 def build_system_prompt(student: dict, topic: dict) -> str:
-    return SYSTEM_PROMPT_TEMPLATE.format(
+    return CONVERSATION_SYSTEM_PROMPT_TEMPLATE.format(
         name=student.get("name", "Student"),
         grade=student.get("grade_level", "?"),
         topic=topic.get("name", "Topic"),
@@ -287,7 +234,7 @@ def run_conversation(
     locked_prediction: dict | None = None
 
     for turn in range(1, max_turns + 1):
-        phase = "diagnostic" if turn <= 5 else "tutoring"
+        phase = "diagnostic" if turn <= 2 else "tutoring"
         turn_directive = (
             f"Turn {turn} of {max_turns}. Phase: {phase}. "
             "Diagnostic phase: ask short questions only; no teaching. "
@@ -334,7 +281,7 @@ def run_conversation(
                 {"role": "student", "turn": turn, "phase": phase, "content": student_response}
             )
 
-        if turn == 5 and locked_prediction is None:
+        if turn == 2 and locked_prediction is None:
             diagnostic_turns = [t for t in turns if t.get("phase") == "diagnostic"]
             level, raw, rationale = predict_level(
                 openai_key, model, mode, student, topic, diagnostic_turns

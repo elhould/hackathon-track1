@@ -1,0 +1,267 @@
+{
+  "set_type": "dev",
+  "prompt_version": "E",
+  "phase": "diagnostic",
+  "model": "gpt-5.2",
+  "generated_at": "2026-01-17T09:21:05Z",
+  "results": [
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "109acc46-a259-4e85-b843-03c14731a800",
+      "current_level": 3,
+      "final_level": 2,
+      "agree": false,
+      "reasoning": "They know basic terms and motions (mantle, boundary types, crumple-up mountains), but they hold a key misconception that volcanoes occur at all convergent boundaries and initially choose the wrong collision type for volcanism, indicating below-grade understanding of subduction-related volcanism.",
+      "raw": "{\n  \"agree\": false,\n  \"final_level\": 2,\n  \"reasoning\": \"They know basic terms and motions (mantle, boundary types, crumple-up mountains), but they hold a key misconception that volcanoes occur at all convergent boundaries and initially choose the wrong collision type for volcanism, indicating below-grade understanding of subduction-related volcanism.\"\n}"
+    },
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "15230241-c8ad-43a1-9bf8-904c4a41c1c7",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": true,
+      "reasoning": "The student correctly identifies vessel types, overall circulation path, oxygen-poor blood going to lungs, pulmonary vein returning to heart, and capillary exchange. They had a key misconception about which ventricle pumps to the body but corrected it after feedback, so performance is at-grade with a fixable gap.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student correctly identifies vessel types, overall circulation path, oxygen-poor blood going to lungs, pulmonary vein returning to heart, and capillary exchange. They had a key misconception about which ventricle pumps to the body but corrected it after feedback, so performance is at-grade with a fixable gap.\"\n}"
+    },
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "20f41fb6-7693-4381-a48b-4ccbe5cf4fcd",
+      "current_level": 3,
+      "final_level": 2,
+      "agree": false,
+      "reasoning": "Student knows the Pythagorean formula and can identify the right angle marker, but repeatedly confuses solving for c vs a leg (e.g., gives 100 instead of 10, adds squares when needing subtraction) and initially forgets the square root, indicating multiple misconceptions/unstable procedure.",
+      "raw": "{\n  \"agree\": false,\n  \"final_level\": 2,\n  \"reasoning\": \"Student knows the Pythagorean formula and can identify the right angle marker, but repeatedly confuses solving for c vs a leg (e.g., gives 100 instead of 10, adds squares when needing subtraction) and initially forgets the square root, indicating multiple misconceptions/unstable procedure.\"\n}"
+    },
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "547b1c18-1933-492f-b545-c125001eeef6",
+      "current_level": 2,
+      "final_level": 2,
+      "agree": true,
+      "reasoning": "Student shows partial recall (1st law and boat as 3rd law) but has key misconceptions: initially misidentifies the puck law, thinks larger mass gives larger acceleration for fixed force, and believes action-reaction forces are unequal. Multiple misconceptions cap the level at 2.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 2,\n  \"reasoning\": \"Student shows partial recall (1st law and boat as 3rd law) but has key misconceptions: initially misidentifies the puck law, thinks larger mass gives larger acceleration for fixed force, and believes action-reaction forces are unequal. Multiple misconceptions cap the level at 2.\"\n}"
+    },
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "a42d788d-497b-4823-bc9f-09821081ee53",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "Student shows solid core understanding of atomic number (with the neutral-atom clarification), table layout (metals/nonmetals/metalloids), groups vs periods after a brief mix-up, valence electrons, and typical ion/reactivity trends for Groups 1, 17, and 18. Only minor initial confusion on group/period, quickly corrected, with no persistent misconceptions.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Student shows solid core understanding of atomic number (with the neutral-atom clarification), table layout (metals/nonmetals/metalloids), groups vs periods after a brief mix-up, valence electrons, and typical ion/reactivity trends for Groups 1, 17, and 18. Only minor initial confusion on group/period, quickly corrected, with no persistent misconceptions.\"\n}"
+    },
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "b09cd19f-e8f4-4587-96c7-11f2612f8040",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": true,
+      "reasoning": "Student knows what slope and y-intercept represent and can compute slope and use it to form the line once prompted. They showed an initial misconception about slope as \u0394x/\u0394y but corrected it quickly, so level is capped at 3.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"Student knows what slope and y-intercept represent and can compute slope and use it to form the line once prompted. They showed an initial misconception about slope as \u0394x/\u0394y but corrected it quickly, so level is capped at 3.\"\n}"
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "a8245611-9efd-4810-95b1-f0c93c303fb7",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": true,
+      "reasoning": "The student correctly factors simple quadratics, recalls the quadratic formula, identifies a/b/c, and substitutes with correct parentheses/signs. Their confusion is limited to interpreting a negative discriminant/domain error (complex vs. no real solutions), which is a single misconception so the level is capped at 3.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student correctly factors simple quadratics, recalls the quadratic formula, identifies a/b/c, and substitutes with correct parentheses/signs. Their confusion is limited to interpreting a negative discriminant/domain error (complex vs. no real solutions), which is a single misconception so the level is capped at 3.\"\n}"
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "1d23f206-ae40-4a17-b201-49900bd22655",
+      "current_level": 3,
+      "final_level": 2,
+      "agree": false,
+      "reasoning": "They show solid understanding of series circuits and basic definitions, but are uncertain and conflicted about parallel-circuit total current (a key concept) and repeatedly express confusion about common misconceptions. This level of uncertainty/misconception warrants a cap at 2.",
+      "raw": "{\n  \"agree\": false,\n  \"final_level\": 2,\n  \"reasoning\": \"They show solid understanding of series circuits and basic definitions, but are uncertain and conflicted about parallel-circuit total current (a key concept) and repeatedly express confusion about common misconceptions. This level of uncertainty/misconception warrants a cap at 2.\"\n}"
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "aeb8a664-3e9f-4343-9bfd-88876e8addfe",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "The student correctly distinguishes ionic vs covalent bonding and knows the common GCSE shapes for methane, ammonia, and water, showing solid core understanding. Their remaining questions are about applying electron-pair counting to naming shapes (lone pairs vs bonding pairs), indicating an occasional gap rather than a key misconception.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student correctly distinguishes ionic vs covalent bonding and knows the common GCSE shapes for methane, ammonia, and water, showing solid core understanding. Their remaining questions are about applying electron-pair counting to naming shapes (lone pairs vs bonding pairs), indicating an occasional gap rather than a key misconception.\"\n}"
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "4f49c53e-3b43-4b96-b454-61f4e3d28f4a",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "The student correctly applies Arrhenius and Br\u00f8nsted ideas, writes balanced neutralization products, identifies proton donor/acceptor, and determines conjugate pairs including charged/polyatomic species. Confusion is expressed but does not lead to incorrect chemistry, indicating mostly solid understanding with minor confidence gaps.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student correctly applies Arrhenius and Br\u00f8nsted ideas, writes balanced neutralization products, identifies proton donor/acceptor, and determines conjugate pairs including charged/polyatomic species. Confusion is expressed but does not lead to incorrect chemistry, indicating mostly solid understanding with minor confidence gaps.\"\n}"
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "44853114-7c3e-4d43-bc47-83dca5380613",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "The student accurately recalls key events and dates (Bastille, June 20 Tennis Court Oath) and understands major causes like Third Estate taxation, showing solid timeline and concept knowledge. Their uncertainty is mainly about how to apply Enlightenment ideas analytically (Rousseau to later events), which is a minor gap rather than a misconception.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student accurately recalls key events and dates (Bastille, June 20 Tennis Court Oath) and understands major causes like Third Estate taxation, showing solid timeline and concept knowledge. Their uncertainty is mainly about how to apply Enlightenment ideas analytically (Rousseau to later events), which is a minor gap rather than a misconception.\"\n}"
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "018364e9-0225-4453-b71f-6a76fcef2994",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "The student shows solid factual knowledge (Factory Acts, Public Health Act) and can articulate cause\u2192effect chains and distinguish short- vs long-term impacts with prompting. Their main issue is applying analysis under time pressure and consistently sorting timelines, which are gaps but not major misconceptions.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student shows solid factual knowledge (Factory Acts, Public Health Act) and can articulate cause\u2192effect chains and distinguish short- vs long-term impacts with prompting. Their main issue is applying analysis under time pressure and consistently sorting timelines, which are gaps but not major misconceptions.\"\n}"
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "a7f709f8-c27d-4be9-a69d-2a50566d9361",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": true,
+      "reasoning": "The student shows at-grade understanding of argumentative structure (thesis, paragraph planning, counterargument) and can apply context ideas when prompted, but is uncertain about integrating context and relies on rigid formulas/colour-coding rather than analysis. No major misconceptions are present\u2014mostly exam-technique anxiety and gaps in confidence.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student shows at-grade understanding of argumentative structure (thesis, paragraph planning, counterargument) and can apply context ideas when prompted, but is uncertain about integrating context and relies on rigid formulas/colour-coding rather than analysis. No major misconceptions are present\u2014mostly exam-technique anxiety and gaps in confidence.\"\n}"
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "f9a4d5a7-aed8-4d93-bad4-830551687a34",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "Der Sch\u00fcler zeigt solides Verst\u00e4ndnis (Inhalt, Strophenform, Reimschema korrekt; Kadenz richtig erkl\u00e4rt; sinnvolle Stilmittelans\u00e4tze) und kann Belege nennen. Es gibt nur kleinere Unsicherheiten beim Metrum/Stilmittelbenennung, aber keine zentrale Fehlvorstellung.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler zeigt solides Verst\u00e4ndnis (Inhalt, Strophenform, Reimschema korrekt; Kadenz richtig erkl\u00e4rt; sinnvolle Stilmittelans\u00e4tze) und kann Belege nennen. Es gibt nur kleinere Unsicherheiten beim Metrum/Stilmittelbenennung, aber keine zentrale Fehlvorstellung.\"\n}"
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "109acc46-a259-4e85-b843-03c14731a800",
+      "current_level": 5,
+      "final_level": 5,
+      "agree": true,
+      "reasoning": "The student accurately describes plate tectonics, correctly ranks Earth\u2019s heat sources, identifies U/Th as key long-lived radiogenic contributors, and reasons well about element partitioning and insulation effects on core cooling/inner-core growth. No clear misconceptions appear\u2014only thoughtful uncertainty and extension questions.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 5,\n  \"reasoning\": \"The student accurately describes plate tectonics, correctly ranks Earth\u2019s heat sources, identifies U/Th as key long-lived radiogenic contributors, and reasons well about element partitioning and insulation effects on core cooling/inner-core growth. No clear misconceptions appear\u2014only thoughtful uncertainty and extension questions.\"\n}"
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "15230241-c8ad-43a1-9bf8-904c4a41c1c7",
+      "current_level": 5,
+      "final_level": 4,
+      "agree": false,
+      "reasoning": "The student shows strong, accurate understanding of cardiac anatomy and pulmonary vs systemic circulation (including the pulmonary artery exception and consequences of high pulmonary pressure), with only minor uncertainty about naming and an overemphasis on gravity. This is above-grade but not clearly advanced across the board.",
+      "raw": "{\n  \"agree\": false,\n  \"final_level\": 4,\n  \"reasoning\": \"The student shows strong, accurate understanding of cardiac anatomy and pulmonary vs systemic circulation (including the pulmonary artery exception and consequences of high pulmonary pressure), with only minor uncertainty about naming and an overemphasis on gravity. This is above-grade but not clearly advanced across the board.\"\n}"
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "20f41fb6-7693-4381-a48b-4ccbe5cf4fcd",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "Der Sch\u00fcler kennt Formel, Anwendungsbereich und Hypotenuse sicher, kann Variablen umbenennen und versteht die Beziehung \u201egr\u00f6\u00dfter Winkel \u2194 l\u00e4ngste Seite\u201c auch in Grenzf\u00e4llen. Die Nachfragen sind eher vertiefend/konzeptuell, ohne erkennbare Fehlvorstellungen.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler kennt Formel, Anwendungsbereich und Hypotenuse sicher, kann Variablen umbenennen und versteht die Beziehung \u201egr\u00f6\u00dfter Winkel \u2194 l\u00e4ngste Seite\u201c auch in Grenzf\u00e4llen. Die Nachfragen sind eher vertiefend/konzeptuell, ohne erkennbare Fehlvorstellungen.\"\n}"
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "547b1c18-1933-492f-b545-c125001eeef6",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "Der Sch\u00fcler erkl\u00e4rt Newtons 1. Gesetz, Richtung der Reibungskraft, Resultierende-Kraft-Null-Fall und Energieumwandlung korrekt und kann Reibungsarten sowie Beispiele nennen. Er stellt weiterf\u00fchrende, sinnvolle Fragen (Nutzbarkeit von W\u00e4rme, Eis/Wasserfilm, Schmierung), ohne klare Fehlvorstellungen zu zeigen.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler erkl\u00e4rt Newtons 1. Gesetz, Richtung der Reibungskraft, Resultierende-Kraft-Null-Fall und Energieumwandlung korrekt und kann Reibungsarten sowie Beispiele nennen. Er stellt weiterf\u00fchrende, sinnvolle Fragen (Nutzbarkeit von W\u00e4rme, Eis/Wasserfilm, Schmierung), ohne klare Fehlvorstellungen zu zeigen.\"\n}"
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "a42d788d-497b-4823-bc9f-09821081ee53",
+      "current_level": 5,
+      "final_level": 4,
+      "agree": false,
+      "reasoning": "Der Sch\u00fcler erkl\u00e4rt Gruppen/Perioden/Ordnungszahl und Isotope korrekt und zeigt gutes Verst\u00e4ndnis der kurzreichweitigen starken Kernkraft sowie sinnvolle Fragen. Es gibt aber eine relevante Unsicherheit/Misskonzeption, indem er die starke Kernkraft mit \u201eMagnetismus\u201c gleichsetzt und die Stabilit\u00e4tsproblematik gro\u00dfer Kerne zun\u00e4chst einseitig der Reichweite zuschreibt, daher nicht Level 5.",
+      "raw": "{\n  \"agree\": false,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler erkl\u00e4rt Gruppen/Perioden/Ordnungszahl und Isotope korrekt und zeigt gutes Verst\u00e4ndnis der kurzreichweitigen starken Kernkraft sowie sinnvolle Fragen. Es gibt aber eine relevante Unsicherheit/Misskonzeption, indem er die starke Kernkraft mit \u201eMagnetismus\u201c gleichsetzt und die Stabilit\u00e4tsproblematik gro\u00dfer Kerne zun\u00e4chst einseitig der Reichweite zuschreibt, daher nicht Level 5.\"\n}"
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "b09cd19f-e8f4-4587-96c7-11f2612f8040",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "The student correctly computes slope from two points, understands negative/fractional slope meaning, and knows undefined slope corresponds to vertical lines. Their remaining confusion is procedural (solving for b by substitution) rather than a core misconception, so level 4 fits.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student correctly computes slope from two points, understands negative/fractional slope meaning, and knows undefined slope corresponds to vertical lines. Their remaining confusion is procedural (solving for b by substitution) rather than a core misconception, so level 4 fits.\"\n}"
+    },
+    {
+      "student_id": "c011d01c-29d4-4452-8fd7-fe84c3372f6d",
+      "topic_id": "ae58d85a-e4b7-4806-ba3a-34742f015daf",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "Der Sch\u00fcler unterscheidet Wette im Himmel vs. Pakt im Studierzimmer korrekt (Ziel/Stake, Fausts Rolle, Ausl\u00f6sebedingung \u201eVerweile doch\u2026\u201c) und kann die Interpretationsrelevanz (Verantwortung/Menschenbild Streben) schl\u00fcssig begr\u00fcnden. Unsicherheit liegt eher bei Arbeitstechnik (Zitate/Versstellen finden) als bei Konzepten; keine zentrale Fehlvorstellung erkennbar.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler unterscheidet Wette im Himmel vs. Pakt im Studierzimmer korrekt (Ziel/Stake, Fausts Rolle, Ausl\u00f6sebedingung \u201eVerweile doch\u2026\u201c) und kann die Interpretationsrelevanz (Verantwortung/Menschenbild Streben) schl\u00fcssig begr\u00fcnden. Unsicherheit liegt eher bei Arbeitstechnik (Zitate/Versstellen finden) als bei Konzepten; keine zentrale Fehlvorstellung erkennbar.\"\n}"
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "40d4a6eb-a410-43df-bd0d-236cc1fc3d71",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "Student correctly handles basic and intermediate probability (independence, complements, without/with replacement, inclusion\u2013exclusion, and union for independent events). One error: \u201cat least one 6\u201d should be 11/36 only if computed as 1-(5/6)^2=11/36, which is correct; overall performance is strong with no key misconceptions.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Student correctly handles basic and intermediate probability (independence, complements, without/with replacement, inclusion\u2013exclusion, and union for independent events). One error: \u201cat least one 6\u201d should be 11/36 only if computed as 1-(5/6)^2=11/36, which is correct; overall performance is strong with no key misconceptions.\"\n}"
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "54a9dadd-6dfb-4f82-a2a1-0e6e90363142",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": true,
+      "reasoning": "The student correctly applies transcription directionality (template read 3'\u21925', RNA built 5'\u21923') and can generate mRNA from both coding and template strands. The main issue is inconsistent terminology mapping in German (initially calling both strands template), but the underlying concept is mostly intact, so level 3 fits.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student correctly applies transcription directionality (template read 3'\u21925', RNA built 5'\u21923') and can generate mRNA from both coding and template strands. The main issue is inconsistent terminology mapping in German (initially calling both strands template), but the underlying concept is mostly intact, so level 3 fits.\"\n}"
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "abca8d72-5fa1-4dfc-bc73-98409e54eaa9",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "Student correctly defines a mole, identifies the limiting reactant, computes theoretical product, excess reactant remaining, and percent yield with accurate reasoning. Shows solid conceptual understanding with no evident misconceptions, consistent with above-grade proficiency.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Student correctly defines a mole, identifies the limiting reactant, computes theoretical product, excess reactant remaining, and percent yield with accurate reasoning. Shows solid conceptual understanding with no evident misconceptions, consistent with above-grade proficiency.\"\n}"
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "c886d970-ef56-4e8d-a097-d50abb0a61ad",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "The student correctly explains frequency, relates v=f\u03bb to v=\u03bb/T via f=1/T, distinguishes constructive vs destructive interference, and knows how to read wavelength vs period from axes. Minor difficulty is mainly with diagram reading/labels, not conceptual misconceptions.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student correctly explains frequency, relates v=f\u03bb to v=\u03bb/T via f=1/T, distinguishes constructive vs destructive interference, and knows how to read wavelength vs period from axes. Minor difficulty is mainly with diagram reading/labels, not conceptual misconceptions.\"\n}"
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "cea92f7f-bf62-411b-ba28-a17be006de5d",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "The student accurately distinguishes distribution vs. density, identifies common spatial patterns (coasts/rivers/climate), correctly defines physiological density, and gives a solid Egypt example plus a key limitation of averages. The last inference about high arithmetic but low physiological density is slightly uncertain/atypical, but not a major misconception overall.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student accurately distinguishes distribution vs. density, identifies common spatial patterns (coasts/rivers/climate), correctly defines physiological density, and gives a solid Egypt example plus a key limitation of averages. The last inference about high arithmetic but low physiological density is slightly uncertain/atypical, but not a major misconception overall.\"\n}"
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "dfe21df4-4310-414b-be39-6eb8a47f8dc1",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": true,
+      "reasoning": "The student has the core WWII/Weimar sequence mostly correct (President appoints Chancellor; fire leads to civil-rights suspension) and shows sound causal reasoning, but has gaps about key mechanisms (Enabling Act\u2019s role) and struggles with primary-source sentence parsing.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student has the core WWII/Weimar sequence mostly correct (President appoints Chancellor; fire leads to civil-rights suspension) and shows sound causal reasoning, but has gaps about key mechanisms (Enabling Act\u2019s role) and struggles with primary-source sentence parsing.\"\n}"
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "e75186c1-b457-4276-abc3-45a7d5ceef6c",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": true,
+      "reasoning": "Der Sch\u00fcler hat grundlegende, alltagsnahe Vorstellungen zu Drama/Roman/Gedicht und zur Drameneinleitung sowie eine korrekte Zuordnung von H\u00f6hepunkt vs. Wendepunkt; zugleich fehlen zentrale Fachbegriffe (Gattung, episch, Exposition, Peripetie) noch weitgehend. Das ist insgesamt auf Kernniveau mit deutlichen L\u00fccken, aber ohne gravierende Fehlkonzepte.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"Der Sch\u00fcler hat grundlegende, alltagsnahe Vorstellungen zu Drama/Roman/Gedicht und zur Drameneinleitung sowie eine korrekte Zuordnung von H\u00f6hepunkt vs. Wendepunkt; zugleich fehlen zentrale Fachbegriffe (Gattung, episch, Exposition, Peripetie) noch weitgehend. Das ist insgesamt auf Kernniveau mit deutlichen L\u00fccken, aber ohne gravierende Fehlkonzepte.\"\n}"
+    }
+  ],
+  "mse_response": {
+    "mse_score": 0.4642857142857143,
+    "num_predictions": 28,
+    "submission_number": 23,
+    "submissions_remaining": 77
+  }
+}

@@ -9,17 +9,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
-
-SELF_REPORT_QUESTION = (
-    "Before we start tutoring, on a scale of 1-5, how well do you feel you "
-    "understand this topic?\n"
-    "1 = Struggling (you struggle with fundamentals)\n"
-    "2 = Below grade (you make frequent mistakes)\n"
-    "3 = At grade (you understand core concepts ok)\n"
-    "4 = Above grade (you have occasional gaps in your understanding)\n"
-    "5 = Advanced (you are ready for more challenging topics)\n"
-    "Please reply with just the number (1-5)."
-)
+from knu_prompts import SELF_REPORT_QUESTION
 
 
 def load_env_file(env_path: Path) -> dict:

@@ -9,3 +9,12 @@
 - 2026-01-16: Reviewed latest conversations to refine level-inference prompt guidance.
 - 2026-01-16: Tightened scoring prompt to be stricter when fundamental issues appear.
 - 2026-01-16: Added self-report script to ask students for a 1–5 understanding level and submit to MSE.
+- 2026-01-16: Added dev rejudge script and tightened scoring prompt gates for higher levels.
+- 2026-01-16: Rejudge script now always uses diagnostic turns (locked prediction point), not end-of-conversation.
+- 2026-01-16: Added rejudge prompt variants A–E and a runner to submit all variants sequentially.
+- 2026-01-16: Overwrote rejudge prompts B–E with A-style rubric plus targeted diagnostic-only gates.
+- 2026-01-16: Added ensemble rejudge script to average scores across multiple models.
+- 2026-01-17: Centralized prompt text in `scripts/knu_prompts.py` and wired scripts to use shared prompts.
+- 2026-01-17: Expanded the diagnostic Turn 1 instruction to request a longer, high-signal question block.
+- 2026-01-17: Switched to 2 diagnostic turns and 8 tutoring turns; locked prediction after turn 2.
+- 2026-01-17: Updated conversation tutoring instructions with level-locked teaching rules and explicit level-adjustment signals.

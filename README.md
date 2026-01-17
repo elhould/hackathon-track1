@@ -20,6 +20,12 @@ Optional:
 LOG_FILE=logs/conversations.jsonl
 ```
 
+## Shared prompts
+
+All prompt text lives in `scripts/knu_prompts.py`. Update prompt A/B/C/D/E
+there once, and every script that references those prompts will pick up the
+change.
+
 ## Scripts
 
 ### `scripts/knu_api.sh`
@@ -142,6 +148,48 @@ Examples:
 Notes:
 - If the student does not return a number, the script can use an LLM to map their reply to 1–5.
 - Disable LLM mapping with `--no-llm-parse` (defaults to 3 when non-numeric).
+
+### `scripts/knu_rejudge_dev.py`
+
+Re-evaluates existing dev conversations against their current predicted levels,
+keeps the score if it agrees, otherwise updates it with a 1–2 sentence reason.
+
+Examples:
+
+```
+./scripts/knu_rejudge_dev.py --input dev_conversations.jsonl --prompt-version A
+./scripts/knu_rejudge_dev.py --input dev_conversations.jsonl --prompt-version B --submit-mse
+```
+
+Notes:
+- Uses the most recent `conversation_summary` per student/topic pair.
+- Always uses diagnostic turns (the locked prediction point).
+- Prompt versions A–E use different strictness/weighting.
+
+### `scripts/knu_rejudge_abcde.sh`
+
+Runs A–E rejudge prompts sequentially and submits each to `/evaluate/mse`.
+
+Examples:
+
+```
+./scripts/knu_rejudge_abcde.sh --input dev_conversations.jsonl --set-type dev --model gpt-5.2 --mode responses
+```
+
+### `scripts/knu_rejudge_ensemble.py`
+
+Runs rejudge with multiple models and averages their levels.
+
+Examples:
+
+```
+./scripts/knu_rejudge_ensemble.py --input dev_conversations.jsonl --prompt-version A --models gpt-5.2,gpt-4o-mini,gpt-4.1-mini
+./scripts/knu_rejudge_ensemble.py --input dev_conversations.jsonl --prompt-version A --models gpt-5.2,gpt-4o-mini,gpt-4.1-mini --submit-mse
+```
+
+Notes:
+- Uses diagnostic turns only.
+- If you don’t have access to a model, remove it from `--models`.
 
 ### `scripts/knu_infer_truth.py`
 

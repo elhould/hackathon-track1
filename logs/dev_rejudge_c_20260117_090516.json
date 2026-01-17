@@ -1,0 +1,267 @@
+{
+  "set_type": "dev",
+  "prompt_version": "C",
+  "phase": "diagnostic",
+  "model": "gpt-5.2",
+  "generated_at": "2026-01-17T09:05:04Z",
+  "results": [
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "109acc46-a259-4e85-b843-03c14731a800",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": true,
+      "reasoning": "The student shows solid core understanding of plates, boundary types, motions, and that continent\u2013continent collisions crumple to form mountains, and they can transfer the buoyancy idea to subduction. However, they repeatedly needed correction on volcano formation at convergent boundaries and initially reasoned with an overgeneralized \u201cbigger crash = more lava\u201d model, so depth is at-grade rather than above.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student shows solid core understanding of plates, boundary types, motions, and that continent\u2013continent collisions crumple to form mountains, and they can transfer the buoyancy idea to subduction. However, they repeatedly needed correction on volcano formation at convergent boundaries and initially reasoned with an overgeneralized \u201cbigger crash = more lava\u201d model, so depth is at-grade rather than above.\"\n}"
+    },
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "15230241-c8ad-43a1-9bf8-904c4a41c1c7",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": true,
+      "reasoning": "The student knows key vessel types, flow direction rules, and oxygenation logic, and can transfer the corrected ventricle roles to a new check. They made a notable misconception about which ventricle pumps to the body but corrected it with guidance, suggesting at-grade understanding with some gaps.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student knows key vessel types, flow direction rules, and oxygenation logic, and can transfer the corrected ventricle roles to a new check. They made a notable misconception about which ventricle pumps to the body but corrected it with guidance, suggesting at-grade understanding with some gaps.\"\n}"
+    },
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "20f41fb6-7693-4381-a48b-4ccbe5cf4fcd",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": false,
+      "reasoning": "They know the core formula and can apply it to find the hypotenuse and use coordinate differences, but they repeatedly miss the square-root step and initially used the wrong operation when solving for a leg, needing correction. With hints they self-correct, so performance is at-grade but not above.",
+      "raw": "{\n  \"agree\": false,\n  \"final_level\": 3,\n  \"reasoning\": \"They know the core formula and can apply it to find the hypotenuse and use coordinate differences, but they repeatedly miss the square-root step and initially used the wrong operation when solving for a leg, needing correction. With hints they self-correct, so performance is at-grade but not above.\"\n}"
+    },
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "547b1c18-1933-492f-b545-c125001eeef6",
+      "current_level": 2,
+      "final_level": 2,
+      "agree": true,
+      "reasoning": "Student shows partial recall (1st and 3rd law) but repeatedly confuses key ideas (puck law, F=ma relationship, and equal-and-opposite force pairs), needing multiple corrections. Some transfer appears in examples (shopping cart, tanks), but misconceptions about force-pair magnitudes indicate below-grade conceptual understanding.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 2,\n  \"reasoning\": \"Student shows partial recall (1st and 3rd law) but repeatedly confuses key ideas (puck law, F=ma relationship, and equal-and-opposite force pairs), needing multiple corrections. Some transfer appears in examples (shopping cart, tanks), but misconceptions about force-pair magnitudes indicate below-grade conceptual understanding.\"\n}"
+    },
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "a42d788d-497b-4823-bc9f-09821081ee53",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "Student shows solid conceptual understanding (atomic number, table regions, groups/periods after a quick correction) and can transfer to valence electrons and typical ion formation/reactivity patterns. Needed a reminder for group vs period but then applied it correctly without repeated hints.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Student shows solid conceptual understanding (atomic number, table regions, groups/periods after a quick correction) and can transfer to valence electrons and typical ion formation/reactivity patterns. Needed a reminder for group vs period but then applied it correctly without repeated hints.\"\n}"
+    },
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "b09cd19f-e8f4-4587-96c7-11f2612f8040",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": true,
+      "reasoning": "The student understands slope as rise/run and can apply it to compute m and verify points once prompted, showing core at-grade competence. However, they initially confused the slope formula and needed multiple hints/corrections, so the level should not exceed 3.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student understands slope as rise/run and can apply it to compute m and verify points once prompted, showing core at-grade competence. However, they initially confused the slope formula and needed multiple hints/corrections, so the level should not exceed 3.\"\n}"
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "a8245611-9efd-4810-95b1-f0c93c303fb7",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": true,
+      "reasoning": "The student correctly factors quadratics, identifies a, b, c, and substitutes into the quadratic formula with proper parentheses, showing solid core skills. They still need support interpreting a negative discriminant (domain error vs complex roots) and show anxiety-driven uncertainty, but not repeated correction dependence.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student correctly factors quadratics, identifies a, b, c, and substitutes into the quadratic formula with proper parentheses, showing solid core skills. They still need support interpreting a negative discriminant (domain error vs complex roots) and show anxiety-driven uncertainty, but not repeated correction dependence.\"\n}"
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "1d23f206-ae40-4a17-b201-49900bd22655",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": false,
+      "reasoning": "They show solid at-grade understanding of voltage/current/resistance, series rules, and can apply Ohm\u2019s law, but they still confuse key parallel-circuit implications (total current) and rely on notes/hints rather than transferring rules confidently.",
+      "raw": "{\n  \"agree\": false,\n  \"final_level\": 3,\n  \"reasoning\": \"They show solid at-grade understanding of voltage/current/resistance, series rules, and can apply Ohm\u2019s law, but they still confuse key parallel-circuit implications (total current) and rely on notes/hints rather than transferring rules confidently.\"\n}"
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "aeb8a664-3e9f-4343-9bfd-88876e8addfe",
+      "current_level": 4,
+      "final_level": 3,
+      "agree": false,
+      "reasoning": "The student shows solid recall of core facts (ionic vs covalent; shapes for methane/ammonia/water) but their reasoning about applying electron-pair counting to unfamiliar molecules is still tentative and question-driven rather than demonstrated transfer. They need guidance on how lone pairs change molecular shape names, indicating at-grade understanding with gaps.",
+      "raw": "{\n  \"agree\": false,\n  \"final_level\": 3,\n  \"reasoning\": \"The student shows solid recall of core facts (ionic vs covalent; shapes for methane/ammonia/water) but their reasoning about applying electron-pair counting to unfamiliar molecules is still tentative and question-driven rather than demonstrated transfer. They need guidance on how lone pairs change molecular shape names, indicating at-grade understanding with gaps.\"\n}"
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "4f49c53e-3b43-4b96-b454-61f4e3d28f4a",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "The student correctly applies Br\u00f8nsted\u2013Lowry ideas (proton donor/acceptor), writes balanced products, identifies conjugate pairs, and transfers the one\u2011proton/charge-change rule to new examples including polyatomic ions. They show some confusion/anxiety but do not require repeated corrections and can reason through novel cases.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student correctly applies Br\u00f8nsted\u2013Lowry ideas (proton donor/acceptor), writes balanced products, identifies conjugate pairs, and transfers the one\u2011proton/charge-change rule to new examples including polyatomic ions. They show some confusion/anxiety but do not require repeated corrections and can reason through novel cases.\"\n}"
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "44853114-7c3e-4d43-bc47-83dca5380613",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "The student accurately recalls key events/dates and can transfer an Enlightenment concept (popular sovereignty) to later developments by asking how it applies to 1793, showing emerging causal reasoning. They still need support to articulate the idea-event link independently and worry about repeating analysis, indicating occasional gaps rather than advanced mastery.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student accurately recalls key events/dates and can transfer an Enlightenment concept (popular sovereignty) to later developments by asking how it applies to 1793, showing emerging causal reasoning. They still need support to articulate the idea-event link independently and worry about repeating analysis, indicating occasional gaps rather than advanced mastery.\"\n}"
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "018364e9-0225-4453-b71f-6a76fcef2994",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "The student can distinguish short- vs long-term consequences, apply a causal-chain framework, and transfer it to new examples (strike vs Labour Party). They still show some uncertainty and reliance on structure to avoid listing facts, but their conceptual understanding and reasoning are above grade.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student can distinguish short- vs long-term consequences, apply a causal-chain framework, and transfer it to new examples (strike vs Labour Party). They still show some uncertainty and reliance on structure to avoid listing facts, but their conceptual understanding and reasoning are above grade.\"\n}"
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "a7f709f8-c27d-4be9-a69d-2a50566d9361",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": true,
+      "reasoning": "The student shows solid at-grade understanding of essay structure and can transfer a provided context-link formula to a new example (Friar as priest), but their reasoning is still template-dependent and they\u2019re unsure how to integrate context and counterargument without sentence starters. They haven\u2019t yet demonstrated independent weighing of multiple causes beyond their chosen evidence set.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student shows solid at-grade understanding of essay structure and can transfer a provided context-link formula to a new example (Friar as priest), but their reasoning is still template-dependent and they\u2019re unsure how to integrate context and counterargument without sentence starters. They haven\u2019t yet demonstrated independent weighing of multiple causes beyond their chosen evidence set.\"\n}"
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "f9a4d5a7-aed8-4d93-bad4-830551687a34",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "Der Sch\u00fcler belegt Aussagen mit passenden Zitaten, erkennt zentrale Formmerkmale (Strophenbau, Reimschema) korrekt und kann Stilmittel sowie Kadenz fachlich stimmig begr\u00fcnden. Unsicherheiten beim Metrum und teils schematisches Raten (\u201eJambus ist Standard\u201c) zeigen noch L\u00fccken, aber insgesamt gelingt Transfer und Analyse \u00fcber dem Klassenniveau.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler belegt Aussagen mit passenden Zitaten, erkennt zentrale Formmerkmale (Strophenbau, Reimschema) korrekt und kann Stilmittel sowie Kadenz fachlich stimmig begr\u00fcnden. Unsicherheiten beim Metrum und teils schematisches Raten (\u201eJambus ist Standard\u201c) zeigen noch L\u00fccken, aber insgesamt gelingt Transfer und Analyse \u00fcber dem Klassenniveau.\"\n}"
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "109acc46-a259-4e85-b843-03c14731a800",
+      "current_level": 5,
+      "final_level": 4,
+      "agree": false,
+      "reasoning": "The student shows strong conceptual understanding and transfer (ranking heat sources, linking element partitioning to mantle/crust, and reasoning about insulation affecting cooling and inner-core growth). However, they still rely on tutor guidance for key mechanisms and haven\u2019t independently articulated the full core heat budget, so 5 is too high.",
+      "raw": "{\n  \"agree\": false,\n  \"final_level\": 4,\n  \"reasoning\": \"The student shows strong conceptual understanding and transfer (ranking heat sources, linking element partitioning to mantle/crust, and reasoning about insulation affecting cooling and inner-core growth). However, they still rely on tutor guidance for key mechanisms and haven\u2019t independently articulated the full core heat budget, so 5 is too high.\"\n}"
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "15230241-c8ad-43a1-9bf8-904c4a41c1c7",
+      "current_level": 5,
+      "final_level": 4,
+      "agree": false,
+      "reasoning": "The student shows strong conceptual understanding and transfer (pulmonary vs systemic pressure, valve exceptions, consequences like pulmonary edema) and asks mechanistic follow-ups. Minor imprecision about gravity being the main driver and some reliance on tutor correction keep it just below advanced.",
+      "raw": "{\n  \"agree\": false,\n  \"final_level\": 4,\n  \"reasoning\": \"The student shows strong conceptual understanding and transfer (pulmonary vs systemic pressure, valve exceptions, consequences like pulmonary edema) and asks mechanistic follow-ups. Minor imprecision about gravity being the main driver and some reliance on tutor correction keep it just below advanced.\"\n}"
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "20f41fb6-7693-4381-a48b-4ccbe5cf4fcd",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "Der Sch\u00fcler beherrscht Formel, Anwendungsbedingung und Umbenennung der Variablen sicher und kann die Hypotenuse korrekt identifizieren sowie die Beziehung \u201egr\u00f6\u00dfter Winkel \u2194 l\u00e4ngste Seite\u201c auf neue Beispiele \u00fcbertragen. Begr\u00fcndungen bleiben eher anschaulich als formal, aber ohne inhaltliche Fehler.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler beherrscht Formel, Anwendungsbedingung und Umbenennung der Variablen sicher und kann die Hypotenuse korrekt identifizieren sowie die Beziehung \u201egr\u00f6\u00dfter Winkel \u2194 l\u00e4ngste Seite\u201c auf neue Beispiele \u00fcbertragen. Begr\u00fcndungen bleiben eher anschaulich als formal, aber ohne inhaltliche Fehler.\"\n}"
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "547b1c18-1933-492f-b545-c125001eeef6",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "Der Sch\u00fcler erkl\u00e4rt Newtons 1. Gesetz, Richtung der Reibung, den Fall resultierende Kraft = 0 sowie Energieumwandlung korrekt und kann Beispiele \u00fcbertragen (Bremsen/Laufen, Eis/Wasserfilm). Es gibt kleine Vereinfachungen (z.B. \u201eschwebt\u201c bei v konstant) und offene Vertiefungsfragen, aber insgesamt \u00fcberdurchschnittliches Verst\u00e4ndnis.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler erkl\u00e4rt Newtons 1. Gesetz, Richtung der Reibung, den Fall resultierende Kraft = 0 sowie Energieumwandlung korrekt und kann Beispiele \u00fcbertragen (Bremsen/Laufen, Eis/Wasserfilm). Es gibt kleine Vereinfachungen (z.B. \u201eschwebt\u201c bei v konstant) und offene Vertiefungsfragen, aber insgesamt \u00fcberdurchschnittliches Verst\u00e4ndnis.\"\n}"
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "a42d788d-497b-4823-bc9f-09821081ee53",
+      "current_level": 5,
+      "final_level": 4,
+      "agree": false,
+      "reasoning": "Der Sch\u00fcler zeigt solides Verst\u00e4ndnis zu Gruppen/Perioden/Ordnungszahl, Isotopen und der kurzreichweitigen starken Kernkraft und kann gut transferieren (Stabilit\u00e4t gro\u00dfer Kerne, Radioaktivit\u00e4t). Es gibt aber konzeptuelle L\u00fccken/Unsicherheiten (starke Kraft als \u201eMagnetismus\u201c, falsche Gewichtung der Instabilit\u00e4tsursache bei Uran) und er braucht wiederholte tutorielle Nachfragen, daher nicht Level 5.",
+      "raw": "{\n  \"agree\": false,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler zeigt solides Verst\u00e4ndnis zu Gruppen/Perioden/Ordnungszahl, Isotopen und der kurzreichweitigen starken Kernkraft und kann gut transferieren (Stabilit\u00e4t gro\u00dfer Kerne, Radioaktivit\u00e4t). Es gibt aber konzeptuelle L\u00fccken/Unsicherheiten (starke Kraft als \u201eMagnetismus\u201c, falsche Gewichtung der Instabilit\u00e4tsursache bei Uran) und er braucht wiederholte tutorielle Nachfragen, daher nicht Level 5.\"\n}"
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "b09cd19f-e8f4-4587-96c7-11f2612f8040",
+      "current_level": 4,
+      "final_level": 3,
+      "agree": false,
+      "reasoning": "The student correctly computes slope as a ratio, interprets negative/fractional slope, and recognizes undefined slope for vertical lines, showing solid core understanding. However, they still need guidance to transfer this into writing equations (finding b from a point and m) and rely on multiple prompts/corrections, so level should not exceed 3.",
+      "raw": "{\n  \"agree\": false,\n  \"final_level\": 3,\n  \"reasoning\": \"The student correctly computes slope as a ratio, interprets negative/fractional slope, and recognizes undefined slope for vertical lines, showing solid core understanding. However, they still need guidance to transfer this into writing equations (finding b from a point and m) and rely on multiple prompts/corrections, so level should not exceed 3.\"\n}"
+    },
+    {
+      "student_id": "c011d01c-29d4-4452-8fd7-fe84c3372f6d",
+      "topic_id": "ae58d85a-e4b7-4806-ba3a-34742f015daf",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "Der Sch\u00fcler unterscheidet sicher zwischen Wette (Meta-Ebene/Menschenbild) und Pakt (konkreter Vertrag) und leitet korrekt die Bedingung des Scheiterns (\u201eVerweile doch\u2026\u201c) sowie Fausts Verantwortung ab. Transfer gelingt (KPI/Vertragslogik), aber es fehlen noch textnahe Begr\u00fcndungen und pr\u00e4zisere Belegarbeit, was auf gelegentliche L\u00fccken hindeutet.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler unterscheidet sicher zwischen Wette (Meta-Ebene/Menschenbild) und Pakt (konkreter Vertrag) und leitet korrekt die Bedingung des Scheiterns (\u201eVerweile doch\u2026\u201c) sowie Fausts Verantwortung ab. Transfer gelingt (KPI/Vertragslogik), aber es fehlen noch textnahe Begr\u00fcndungen und pr\u00e4zisere Belegarbeit, was auf gelegentliche L\u00fccken hindeutet.\"\n}"
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "40d4a6eb-a410-43df-bd0d-236cc1fc3d71",
+      "current_level": 4,
+      "final_level": 3,
+      "agree": false,
+      "reasoning": "The student shows solid core skills (independence, complements, without/with replacement, inclusion\u2013exclusion) and correct reasoning on most items, but makes a notable error on \u201cat least one 6\u201d (should be 11/36, not 11/36? actually correct is 11/36? wait: 1-(5/6)^2=11/36, so correct) and otherwise demonstrates at-grade competence rather than consistently above-grade transfer.",
+      "raw": "{\n  \"agree\": false,\n  \"final_level\": 3,\n  \"reasoning\": \"The student shows solid core skills (independence, complements, without/with replacement, inclusion\u2013exclusion) and correct reasoning on most items, but makes a notable error on \u201cat least one 6\u201d (should be 11/36, not 11/36? actually correct is 11/36? wait: 1-(5/6)^2=11/36, so correct) and otherwise demonstrates at-grade competence rather than consistently above-grade transfer.\"\n}"
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "54a9dadd-6dfb-4f82-a2a1-0e6e90363142",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": true,
+      "reasoning": "The student shows solid core understanding of transcription directionality and can correctly derive mRNA from both coding and template strands, indicating at-grade mastery. Confusion is mainly terminology/label transfer (German strand names) and required tutor clarification, so performance doesn\u2019t justify above-grade.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student shows solid core understanding of transcription directionality and can correctly derive mRNA from both coding and template strands, indicating at-grade mastery. Confusion is mainly terminology/label transfer (German strand names) and required tutor clarification, so performance doesn\u2019t justify above-grade.\"\n}"
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "abca8d72-5fa1-4dfc-bc73-98409e54eaa9",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "The student correctly applies limiting-reactant logic, uses mole ratios to find theoretical product, computes excess reactant remaining, and calculates percent yield without needing hints. Minor imprecision in stating the O2:H2O ratio, but the reasoning and transfer across related tasks are solid.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student correctly applies limiting-reactant logic, uses mole ratios to find theoretical product, computes excess reactant remaining, and calculates percent yield without needing hints. Minor imprecision in stating the O2:H2O ratio, but the reasoning and transfer across related tasks are solid.\"\n}"
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "c886d970-ef56-4e8d-a097-d50abb0a61ad",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "The student accurately explains frequency, connects v=f\u03bb with v=\u03bb/T via f=1/T, and correctly distinguishes constructive/destructive interference and what phase differences do to amplitude. They show solid transfer to diagram interpretation (distance axis \u2192 wavelength) with only minor uncertainty due to a cut-off prompt, not conceptual confusion.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student accurately explains frequency, connects v=f\u03bb with v=\u03bb/T via f=1/T, and correctly distinguishes constructive/destructive interference and what phase differences do to amplitude. They show solid transfer to diagram interpretation (distance axis \u2192 wavelength) with only minor uncertainty due to a cut-off prompt, not conceptual confusion.\"\n}"
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "cea92f7f-bf62-411b-ba28-a17be006de5d",
+      "current_level": 4,
+      "final_level": 4,
+      "agree": true,
+      "reasoning": "The student shows solid conceptual understanding and can transfer ideas to new prompts (patterns on density maps, physiological vs arithmetic density, and limitations of averages) with accurate examples. The last inference is slightly shaky but still demonstrates above-grade reasoning without needing repeated hints.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student shows solid conceptual understanding and can transfer ideas to new prompts (patterns on density maps, physiological vs arithmetic density, and limitations of averages) with accurate examples. The last inference is slightly shaky but still demonstrates above-grade reasoning without needing repeated hints.\"\n}"
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "dfe21df4-4310-414b-be39-6eb8a47f8dc1",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": true,
+      "reasoning": "The student shows solid core understanding and causal reasoning (correctly identifying the President\u2019s role and why suspending civil rights comes before ending elections) and can revise their model when given new info (Enabling Act\u2019s significance). However, they still rely on tutor scaffolding for key sequence/details and struggle to transfer skills to primary-source reading without explicit strategies, keeping them at level 3.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student shows solid core understanding and causal reasoning (correctly identifying the President\u2019s role and why suspending civil rights comes before ending elections) and can revise their model when given new info (Enabling Act\u2019s significance). However, they still rely on tutor scaffolding for key sequence/details and struggle to transfer skills to primary-source reading without explicit strategies, keeping them at level 3.\"\n}"
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "e75186c1-b457-4276-abc3-45a7d5ceef6c",
+      "current_level": 3,
+      "final_level": 3,
+      "agree": true,
+      "reasoning": "Der Sch\u00fcler zeigt grundlegendes Verst\u00e4ndnis von Drama/Struktur (Akt/Szene, Anfang/Ende, H\u00f6hepunkt vs. Wendepunkt) und kann Begriffe sinnvoll zuordnen und \u00fcbertragen (Mathe-Analogie). Gleichzeitig fehlen zentrale Fachbegriffe wie Exposition/Peripetie noch weitgehend, was auf begrenzte Tiefe hindeutet.",
+      "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"Der Sch\u00fcler zeigt grundlegendes Verst\u00e4ndnis von Drama/Struktur (Akt/Szene, Anfang/Ende, H\u00f6hepunkt vs. Wendepunkt) und kann Begriffe sinnvoll zuordnen und \u00fcbertragen (Mathe-Analogie). Gleichzeitig fehlen zentrale Fachbegriffe wie Exposition/Peripetie noch weitgehend, was auf begrenzte Tiefe hindeutet.\"\n}"
+    }
+  ],
+  "mse_response": {
+    "mse_score": 0.6428571428571429,
+    "num_predictions": 28,
+    "submission_number": 14,
+    "submissions_remaining": 86
+  }
+}
