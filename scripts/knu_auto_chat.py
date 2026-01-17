@@ -54,6 +54,7 @@ Behavioral signals to weigh:
 - Metacognition (noticing and fixing mistakes)
 - Transfer (applying to new examples without prompting)
 - Engagement (curiosity, deeper questions)
+- If there are glaring fundamental issues (basic symbols/notation or task meaning), be stricter and lean lower.
 
 Return a JSON object with:
 {{
