@@ -16,5 +16,9 @@
 - 2026-01-16: Added ensemble rejudge script to average scores across multiple models.
 - 2026-01-17: Centralized prompt text in `scripts/knu_prompts.py` and wired scripts to use shared prompts.
 - 2026-01-17: Expanded the diagnostic Turn 1 instruction to request a longer, high-signal question block.
-- 2026-01-17: Switched to 2 diagnostic turns and 8 tutoring turns; locked prediction after turn 2.
+- 2026-01-17: Switched to 4 diagnostic turns and 6 tutoring turns; locked prediction after turn 4.
 - 2026-01-17: Updated conversation tutoring instructions with level-locked teaching rules and explicit level-adjustment signals.
+- 2026-01-17: Escaped JSON braces in shared prompt templates to fix format errors in scoring.
+- 2026-01-17: Added parallel execution to auto-chat (default up to 10 conversations at once).
+- 2026-01-17: Added parallel execution to ensemble rejudge (default up to 10 in flight).
+- 2026-01-17: Added `--rounding` flag to ensemble rejudge to control average rounding.

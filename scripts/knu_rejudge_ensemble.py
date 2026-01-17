@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import math
 import os
 import time
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -10,6 +13,14 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from knu_prompts import get_rejudge_prompt
+
+
+_PRINT_LOCK = threading.Lock()
+
+
+def safe_print(message: str) -> None:
+    with _PRINT_LOCK:
+        print(message, flush=True)
 
 
 def load_env_file(env_path: Path) -> dict:
@@ -197,6 +208,74 @@ def round_half_up(value: float) -> int:
     return int(value + 0.5)
 
 
+def rejudge_pair(
+    openai_key: str,
+    models: list[str],
+    mode: str,
+    prompt_template: str,
+    rounding_mode: str,
+    student_id: str,
+    topic_id: str,
+    convo: dict,
+) -> tuple[dict | None, dict | None, str | None]:
+    pred = convo.get("prediction", {})
+    current_level = pred.get("level")
+    if not isinstance(current_level, (int, float)):
+        return None, None, None
+    current_level = int(current_level)
+    transcript = build_transcript(convo.get("turns", []))
+    prompt = prompt_template.format(current_level=current_level, transcript=transcript)
+    messages = [
+        {"role": "system", "content": "Return only valid JSON. No extra text."},
+        {"role": "user", "content": prompt},
+    ]
+
+    model_votes = []
+    for model in models:
+        raw = openai_call(openai_key, model, messages, mode)
+        agree, final_level, reasoning = parse_rejudge(raw, current_level)
+        model_votes.append(
+            {
+                "model": model,
+                "agree": agree,
+                "level": final_level,
+                "reasoning": reasoning,
+                "raw": raw,
+            }
+        )
+
+    avg_level = sum(v["level"] for v in model_votes) / len(model_votes)
+    if rounding_mode == "up":
+        final_level = math.ceil(avg_level)
+    elif rounding_mode == "down":
+        final_level = math.floor(avg_level)
+    else:
+        final_level = round_half_up(avg_level)
+    if final_level < 1:
+        final_level = 1
+    if final_level > 5:
+        final_level = 5
+
+    reasoning_pick = min(
+        model_votes, key=lambda v: abs(v["level"] - avg_level)
+    ).get("reasoning", "")
+
+    result = {
+        "student_id": student_id,
+        "topic_id": topic_id,
+        "current_level": current_level,
+        "avg_level": avg_level,
+        "final_level": final_level,
+        "model_votes": model_votes,
+        "reasoning": reasoning_pick,
+    }
+    prediction = {"student_id": student_id, "topic_id": topic_id, "predicted_level": final_level}
+
+    levels = ",".join(str(v["level"]) for v in model_votes)
+    line = f"{student_id} {topic_id}: [{levels}] avg={avg_level:.2f} -> {final_level}"
+    return result, prediction, line
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Rejudge dev conversations with an ensemble of models and average the result."
@@ -210,8 +289,20 @@ def main() -> int:
         help="Comma-separated model list",
     )
     parser.add_argument("--mode", default="responses", help="OpenAI API mode: responses|chat")
+    parser.add_argument(
+        "--rounding",
+        default="nearest",
+        choices=["nearest", "up", "down"],
+        help="How to round average level: nearest (default), up, or down",
+    )
     parser.add_argument("--out", default=None, help="Output JSON path")
     parser.add_argument("--submit-mse", action="store_true", help="Submit to /evaluate/mse")
+    parser.add_argument(
+        "--max-parallel",
+        type=int,
+        default=10,
+        help="Max parallel rejudge requests",
+    )
     args = parser.parse_args()
 
     repo_root = Path(__file__).resolve().parents[1]
@@ -241,64 +332,38 @@ def main() -> int:
     results = []
     predictions = []
     prompt_template = get_rejudge_prompt(args.prompt_version)
-    for (student_id, topic_id), convo in conversations.items():
-        pred = convo.get("prediction", {})
-        current_level = pred.get("level")
-        if not isinstance(current_level, (int, float)):
-            continue
-        current_level = int(current_level)
-        transcript = build_transcript(convo.get("turns", []))
-        prompt = prompt_template.format(current_level=current_level, transcript=transcript)
-        messages = [
-            {"role": "system", "content": "Return only valid JSON. No extra text."},
-            {"role": "user", "content": prompt},
-        ]
-
-        model_votes = []
-        for model in models:
-            raw = openai_call(openai_key, model, messages, args.mode)
-            agree, final_level, reasoning = parse_rejudge(raw, current_level)
-            model_votes.append(
-                {
-                    "model": model,
-                    "agree": agree,
-                    "level": final_level,
-                    "reasoning": reasoning,
-                    "raw": raw,
-                }
-            )
-
-        avg_level = sum(v["level"] for v in model_votes) / len(model_votes)
-        final_level = round_half_up(avg_level)
-        if final_level < 1:
-            final_level = 1
-        if final_level > 5:
-            final_level = 5
-
-        reasoning_pick = min(
-            model_votes, key=lambda v: abs(v["level"] - avg_level)
-        ).get("reasoning", "")
-
-        results.append(
-            {
-                "student_id": student_id,
-                "topic_id": topic_id,
-                "current_level": current_level,
-                "avg_level": avg_level,
-                "final_level": final_level,
-                "model_votes": model_votes,
-                "reasoning": reasoning_pick,
-            }
-        )
-        predictions.append(
-            {"student_id": student_id, "topic_id": topic_id, "predicted_level": final_level}
-        )
-
-        levels = ",".join(str(v["level"]) for v in model_votes)
-        print(
-            f"{student_id} {topic_id}: [{levels}] avg={avg_level:.2f} -> {final_level}",
-            flush=True,
-        )
+    items = list(conversations.items())
+    max_parallel = args.max_parallel if args.max_parallel > 0 else 1
+    worker_count = min(max_parallel, len(items))
+    with ThreadPoolExecutor(max_workers=worker_count) as executor:
+        future_map = {
+            executor.submit(
+                rejudge_pair,
+                openai_key,
+                models,
+                args.mode,
+                prompt_template,
+                args.rounding,
+                student_id,
+                topic_id,
+                convo,
+            ): (student_id, topic_id)
+            for (student_id, topic_id), convo in items
+        }
+        for future in as_completed(future_map):
+            try:
+                result, prediction, line = future.result()
+            except Exception as exc:
+                student_id, topic_id = future_map[future]
+                raise RuntimeError(
+                    f"Rejudge failed for {student_id} {topic_id}: {exc}"
+                ) from exc
+            if result is None or prediction is None:
+                continue
+            results.append(result)
+            predictions.append(prediction)
+            if line:
+                safe_print(line)
 
     output = {
         "set_type": args.set_type,
@@ -325,7 +390,7 @@ def main() -> int:
             {"set_type": args.set_type, "predictions": predictions},
         )
         output["mse_response"] = resp
-        print(json.dumps(resp, ensure_ascii=True, indent=2), flush=True)
+        safe_print(json.dumps(resp, ensure_ascii=True, indent=2))
 
     timestamp = time.strftime("%Y%m%d_%H%M%S", time.gmtime())
     out_path = (
@@ -336,7 +401,7 @@ def main() -> int:
     )
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(output, ensure_ascii=True, indent=2), encoding="utf-8")
-    print(f"Saved: {out_path}", flush=True)
+    safe_print(f"Saved: {out_path}")
     return 0
 
 

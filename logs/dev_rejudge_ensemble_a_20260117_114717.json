@@ -1,0 +1,689 @@
+{
+  "set_type": "dev",
+  "prompt_version": "A",
+  "models": [
+    "gpt-5.2",
+    "gpt-4.1"
+  ],
+  "generated_at": "2026-01-17T11:47:04Z",
+  "results": [
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "aeb8a664-3e9f-4343-9bfd-88876e8addfe",
+      "current_level": 4,
+      "avg_level": 4.0,
+      "final_level": 4,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student correctly distinguishes ionic vs covalent bonding and knows the key GCSE shapes for methane, ammonia, and water. Their remaining questions show minor uncertainty about how lone pairs affect molecular shape naming, but not a fundamental misunderstanding.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student correctly distinguishes ionic vs covalent bonding and knows the key GCSE shapes for methane, ammonia, and water. Their remaining questions show minor uncertainty about how lone pairs affect molecular shape naming, but not a fundamental misunderstanding.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student demonstrates solid understanding of core concepts, can correctly name shapes, and is aware of lone pairs' impact, but shows some uncertainty about applying electron pair counting to unfamiliar molecules, indicating occasional gaps.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student demonstrates solid understanding of core concepts, can correctly name shapes, and is aware of lone pairs' impact, but shows some uncertainty about applying electron pair counting to unfamiliar molecules, indicating occasional gaps.\"\n}"
+        }
+      ],
+      "reasoning": "The student correctly distinguishes ionic vs covalent bonding and knows the key GCSE shapes for methane, ammonia, and water. Their remaining questions show minor uncertainty about how lone pairs affect molecular shape naming, but not a fundamental misunderstanding."
+    },
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "20f41fb6-7693-4381-a48b-4ccbe5cf4fcd",
+      "current_level": 3,
+      "avg_level": 2.0,
+      "final_level": 2,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": false,
+          "level": 2,
+          "reasoning": "Student knows the basic formula and can identify the right angle marker, but repeatedly makes fundamental procedural errors (forgetting square roots, adding when needing subtraction) and shows inconsistent execution without prompting.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 2,\n  \"reasoning\": \"Student knows the basic formula and can identify the right angle marker, but repeatedly makes fundamental procedural errors (forgetting square roots, adding when needing subtraction) and shows inconsistent execution without prompting.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": false,
+          "level": 2,
+          "reasoning": "The student repeatedly confuses the final step of the Pythagorean Theorem, giving the sum of squares instead of taking the square root. This is a fundamental misunderstanding, so a level 2 is appropriate.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 2,\n  \"reasoning\": \"The student repeatedly confuses the final step of the Pythagorean Theorem, giving the sum of squares instead of taking the square root. This is a fundamental misunderstanding, so a level 2 is appropriate.\"\n}"
+        }
+      ],
+      "reasoning": "Student knows the basic formula and can identify the right angle marker, but repeatedly makes fundamental procedural errors (forgetting square roots, adding when needing subtraction) and shows inconsistent execution without prompting."
+    },
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "109acc46-a259-4e85-b843-03c14731a800",
+      "current_level": 3,
+      "avg_level": 2.0,
+      "final_level": 2,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": false,
+          "level": 2,
+          "reasoning": "The student knows basic terms (mantle, boundary types, motions) but shows a fundamental misconception that volcanoes occur at all convergent boundaries and initially misidentifies which collision type produces volcanoes, indicating below-grade understanding despite some correct pieces.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 2,\n  \"reasoning\": \"The student knows basic terms (mantle, boundary types, motions) but shows a fundamental misconception that volcanoes occur at all convergent boundaries and initially misidentifies which collision type produces volcanoes, indicating below-grade understanding despite some correct pieces.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": false,
+          "level": 2,
+          "reasoning": "The student shows some understanding of plate boundaries and motions, but has a fundamental misunderstanding about where volcanoes form and why. They incorrectly believe volcanoes form at all convergent boundaries and do not grasp the key role of subduction.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 2,\n  \"reasoning\": \"The student shows some understanding of plate boundaries and motions, but has a fundamental misunderstanding about where volcanoes form and why. They incorrectly believe volcanoes form at all convergent boundaries and do not grasp the key role of subduction.\"\n}"
+        }
+      ],
+      "reasoning": "The student knows basic terms (mantle, boundary types, motions) but shows a fundamental misconception that volcanoes occur at all convergent boundaries and initially misidentifies which collision type produces volcanoes, indicating below-grade understanding despite some correct pieces."
+    },
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "b09cd19f-e8f4-4587-96c7-11f2612f8040",
+      "current_level": 3,
+      "avg_level": 2.5,
+      "final_level": 2,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": false,
+          "level": 2,
+          "reasoning": "The student knows m is slope and can compute values once given the correct formula, but they showed a fundamental misunderstanding of slope as x/y and repeated uncertainty about the procedure. This indicates below-grade mastery with frequent mistakes despite being able to follow corrections.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 2,\n  \"reasoning\": \"The student knows m is slope and can compute values once given the correct formula, but they showed a fundamental misunderstanding of slope as x/y and repeated uncertainty about the procedure. This indicates below-grade mastery with frequent mistakes despite being able to follow corrections.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 3,
+          "reasoning": "The student understands the core concepts and can apply the slope formula with guidance, but shows some confusion about the order of operations and needs reminders. Occasional uncertainty suggests they are at grade level but not yet above.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student understands the core concepts and can apply the slope formula with guidance, but shows some confusion about the order of operations and needs reminders. Occasional uncertainty suggests they are at grade level but not yet above.\"\n}"
+        }
+      ],
+      "reasoning": "The student knows m is slope and can compute values once given the correct formula, but they showed a fundamental misunderstanding of slope as x/y and repeated uncertainty about the procedure. This indicates below-grade mastery with frequent mistakes despite being able to follow corrections."
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "4f49c53e-3b43-4b96-b454-61f4e3d28f4a",
+      "current_level": 4,
+      "avg_level": 4.0,
+      "final_level": 4,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student correctly applies Arrhenius and Br\u00f8nsted ideas, writes balanced neutralization and proton-transfer products, and identifies conjugate pairs (including charged species) with the one\u2011proton/charge-change rule. Some expressed confusion and hesitation with polyatomic ions suggests occasional gaps rather than fundamental misunderstandings.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student correctly applies Arrhenius and Br\u00f8nsted ideas, writes balanced neutralization and proton-transfer products, and identifies conjugate pairs (including charged species) with the one\u2011proton/charge-change rule. Some expressed confusion and hesitation with polyatomic ions suggests occasional gaps rather than fundamental misunderstandings.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student consistently applies the Br\u00f8nsted-Lowry concept and correctly identifies conjugate pairs, including with polyatomic ions, but shows some uncertainty and needs reassurance about more complex cases. Occasional confusion suggests minor gaps, so level 4 is appropriate.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student consistently applies the Br\u00f8nsted-Lowry concept and correctly identifies conjugate pairs, including with polyatomic ions, but shows some uncertainty and needs reassurance about more complex cases. Occasional confusion suggests minor gaps, so level 4 is appropriate.\"\n}"
+        }
+      ],
+      "reasoning": "The student correctly applies Arrhenius and Br\u00f8nsted ideas, writes balanced neutralization and proton-transfer products, and identifies conjugate pairs (including charged species) with the one\u2011proton/charge-change rule. Some expressed confusion and hesitation with polyatomic ions suggests occasional gaps rather than fundamental misunderstandings."
+    },
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "15230241-c8ad-43a1-9bf8-904c4a41c1c7",
+      "current_level": 3,
+      "avg_level": 3.0,
+      "final_level": 3,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 3,
+          "reasoning": "The student correctly identifies vessel types, flow path, oxygen-poor blood to lungs, pulmonary vein return, and capillary exchange, and self-corrects quickly. They had a notable misconception about which ventricle pumps to the body, but they understood and fixed it after feedback, consistent with at-grade understanding.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student correctly identifies vessel types, flow path, oxygen-poor blood to lungs, pulmonary vein return, and capillary exchange, and self-corrects quickly. They had a notable misconception about which ventricle pumps to the body, but they understood and fixed it after feedback, consistent with at-grade understanding.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 3,
+          "reasoning": "The student demonstrates understanding of the main circulatory loop, vessel types, and capillary function, but made a key error about which ventricle pumps to the body and needed correction. Occasional uncertainty and mix-ups indicate grade-level understanding with some gaps.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student demonstrates understanding of the main circulatory loop, vessel types, and capillary function, but made a key error about which ventricle pumps to the body and needed correction. Occasional uncertainty and mix-ups indicate grade-level understanding with some gaps.\"\n}"
+        }
+      ],
+      "reasoning": "The student correctly identifies vessel types, flow path, oxygen-poor blood to lungs, pulmonary vein return, and capillary exchange, and self-corrects quickly. They had a notable misconception about which ventricle pumps to the body, but they understood and fixed it after feedback, consistent with at-grade understanding."
+    },
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "547b1c18-1933-492f-b545-c125001eeef6",
+      "current_level": 2,
+      "avg_level": 2.0,
+      "final_level": 2,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 2,
+          "reasoning": "Student shows partial recall (1st and 3rd law contexts) but has fundamental misunderstandings: initially misidentifies the puck law, thinks larger mass gives larger acceleration for fixed force, and believes action-reaction forces are unequal. These are core conceptual errors despite some correction after prompting.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 2,\n  \"reasoning\": \"Student shows partial recall (1st and 3rd law contexts) but has fundamental misunderstandings: initially misidentifies the puck law, thinks larger mass gives larger acceleration for fixed force, and believes action-reaction forces are unequal. These are core conceptual errors despite some correction after prompting.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 2,
+          "reasoning": "The student confuses key concepts (e.g., F=ma, action-reaction forces) and shows repeated uncertainty, despite some progress. Fundamental misunderstandings persist, so level 2 is appropriate.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 2,\n  \"reasoning\": \"The student confuses key concepts (e.g., F=ma, action-reaction forces) and shows repeated uncertainty, despite some progress. Fundamental misunderstandings persist, so level 2 is appropriate.\"\n}"
+        }
+      ],
+      "reasoning": "Student shows partial recall (1st and 3rd law contexts) but has fundamental misunderstandings: initially misidentifies the puck law, thinks larger mass gives larger acceleration for fixed force, and believes action-reaction forces are unequal. These are core conceptual errors despite some correction after prompting."
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "a8245611-9efd-4810-95b1-f0c93c303fb7",
+      "current_level": 3,
+      "avg_level": 3.0,
+      "final_level": 3,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 3,
+          "reasoning": "The student correctly factors simple quadratics, identifies a, b, c, recalls the quadratic formula, and substitutes with correct sign/parentheses. They show anxiety and uncertainty about negatives and interpret a negative discriminant as possibly 'no solution,' but this is not a fundamental misunderstanding\u2014more a gap about complex roots.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student correctly factors simple quadratics, identifies a, b, c, recalls the quadratic formula, and substitutes with correct sign/parentheses. They show anxiety and uncertainty about negatives and interpret a negative discriminant as possibly 'no solution,' but this is not a fundamental misunderstanding\u2014more a gap about complex roots.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 3,
+          "reasoning": "The student can factor and substitute correctly into the quadratic formula, but shows uncertainty with negative numbers under the square root and is unsure about the meaning of complex solutions. This indicates core concepts are mostly in place, but there are still gaps with non-real solutions and confidence.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student can factor and substitute correctly into the quadratic formula, but shows uncertainty with negative numbers under the square root and is unsure about the meaning of complex solutions. This indicates core concepts are mostly in place, but there are still gaps with non-real solutions and confidence.\"\n}"
+        }
+      ],
+      "reasoning": "The student correctly factors simple quadratics, identifies a, b, c, recalls the quadratic formula, and substitutes with correct sign/parentheses. They show anxiety and uncertainty about negatives and interpret a negative discriminant as possibly 'no solution,' but this is not a fundamental misunderstanding\u2014more a gap about complex roots."
+    },
+    {
+      "student_id": "55cf65c1-9ddf-4d16-a301-41121d93b079",
+      "topic_id": "a42d788d-497b-4823-bc9f-09821081ee53",
+      "current_level": 4,
+      "avg_level": 4.0,
+      "final_level": 4,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 4,
+          "reasoning": "Student shows solid understanding of atomic number (with the neutral-atom caveat), table regions, groups vs periods after a brief mix-up, and can apply group/valence-electron ideas to predict ion formation and reactivity. The main gap is initial uncertainty on group vs period, but overall performance is above grade with only occasional confusion.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Student shows solid understanding of atomic number (with the neutral-atom caveat), table regions, groups vs periods after a brief mix-up, and can apply group/valence-electron ideas to predict ion formation and reactivity. The main gap is initial uncertainty on group vs period, but overall performance is above grade with only occasional confusion.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student demonstrates solid understanding of periodic table basics, group/period distinctions, and valence electron concepts, with only minor uncertainty about terminology. No fundamental misunderstandings are present, but occasional confusion suggests room for improvement before reaching advanced level.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student demonstrates solid understanding of periodic table basics, group/period distinctions, and valence electron concepts, with only minor uncertainty about terminology. No fundamental misunderstandings are present, but occasional confusion suggests room for improvement before reaching advanced level.\"\n}"
+        }
+      ],
+      "reasoning": "Student shows solid understanding of atomic number (with the neutral-atom caveat), table regions, groups vs periods after a brief mix-up, and can apply group/valence-electron ideas to predict ion formation and reactivity. The main gap is initial uncertainty on group vs period, but overall performance is above grade with only occasional confusion."
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "1d23f206-ae40-4a17-b201-49900bd22655",
+      "current_level": 3,
+      "avg_level": 2.0,
+      "final_level": 2,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": false,
+          "level": 2,
+          "reasoning": "They show solid understanding of basic series-circuit ideas (current same, resistance adds, voltage divides) and can use Ohm\u2019s law, but they are fundamentally uncertain about parallel circuits and initially reason the total current might go down, indicating a key conceptual gap and frequent confusion between series vs. parallel rules.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 2,\n  \"reasoning\": \"They show solid understanding of basic series-circuit ideas (current same, resistance adds, voltage divides) and can use Ohm\u2019s law, but they are fundamentally uncertain about parallel circuits and initially reason the total current might go down, indicating a key conceptual gap and frequent confusion between series vs. parallel rules.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": false,
+          "level": 2,
+          "reasoning": "The student shows repeated uncertainty and fundamental confusion about current in parallel circuits, despite being able to recall series rules and Ohm's law. This indicates below grade-level understanding, especially since series/parallel distinctions are core concepts.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 2,\n  \"reasoning\": \"The student shows repeated uncertainty and fundamental confusion about current in parallel circuits, despite being able to recall series rules and Ohm's law. This indicates below grade-level understanding, especially since series/parallel distinctions are core concepts.\"\n}"
+        }
+      ],
+      "reasoning": "They show solid understanding of basic series-circuit ideas (current same, resistance adds, voltage divides) and can use Ohm\u2019s law, but they are fundamentally uncertain about parallel circuits and initially reason the total current might go down, indicating a key conceptual gap and frequent confusion between series vs. parallel rules."
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "018364e9-0225-4453-b71f-6a76fcef2994",
+      "current_level": 4,
+      "avg_level": 3.5,
+      "final_level": 3,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student shows solid core knowledge (short vs long-term examples, Public Health Act context, key Factory Act ideas) and can apply cause\u2192effect analysis when prompted. Remaining gaps are mainly in organizing timelines and consistently building impact chains under pressure rather than fundamental misunderstandings.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student shows solid core knowledge (short vs long-term examples, Public Health Act context, key Factory Act ideas) and can apply cause\u2192effect analysis when prompted. Remaining gaps are mainly in organizing timelines and consistently building impact chains under pressure rather than fundamental misunderstandings.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": false,
+          "level": 3,
+          "reasoning": "The student demonstrates solid factual recall and is improving at analysis, but still struggles to consistently link cause and effect and to clearly distinguish short-term from long-term consequences, which are core grade-level skills.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 3,\n  \"reasoning\": \"The student demonstrates solid factual recall and is improving at analysis, but still struggles to consistently link cause and effect and to clearly distinguish short-term from long-term consequences, which are core grade-level skills.\"\n}"
+        }
+      ],
+      "reasoning": "The student shows solid core knowledge (short vs long-term examples, Public Health Act context, key Factory Act ideas) and can apply cause\u2192effect analysis when prompted. Remaining gaps are mainly in organizing timelines and consistently building impact chains under pressure rather than fundamental misunderstandings."
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "a7f709f8-c27d-4be9-a69d-2a50566d9361",
+      "current_level": 3,
+      "avg_level": 2.5,
+      "final_level": 2,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 3,
+          "reasoning": "The student shows solid at-grade understanding of argumentative structure (thesis, paragraphing, counterargument) and can apply guidance, but has notable uncertainty about integrating context and relies on formulaic \u201cexam board\u201d rules rather than demonstrating independent analytical control.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student shows solid at-grade understanding of argumentative structure (thesis, paragraphing, counterargument) and can apply guidance, but has notable uncertainty about integrating context and relies on formulaic \u201cexam board\u201d rules rather than demonstrating independent analytical control.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": false,
+          "level": 2,
+          "reasoning": "The student shows repeated uncertainty about integrating context and counterarguments, and lacks confidence with key exam skills. There are fundamental gaps in understanding how to structure analysis and meet rubric requirements.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 2,\n  \"reasoning\": \"The student shows repeated uncertainty about integrating context and counterarguments, and lacks confidence with key exam skills. There are fundamental gaps in understanding how to structure analysis and meet rubric requirements.\"\n}"
+        }
+      ],
+      "reasoning": "The student shows solid at-grade understanding of argumentative structure (thesis, paragraphing, counterargument) and can apply guidance, but has notable uncertainty about integrating context and relies on formulaic \u201cexam board\u201d rules rather than demonstrating independent analytical control."
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "f9a4d5a7-aed8-4d93-bad4-830551687a34",
+      "current_level": 4,
+      "avg_level": 4.0,
+      "final_level": 4,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 4,
+          "reasoning": "Der Sch\u00fcler zeigt solides Verst\u00e4ndnis: Inhalt, Belegstellen, Strophenform, Reimschema und Kadenz werden korrekt erkannt und begr\u00fcndet. Unsicherheiten beim Metrum/Stilmitteln sind vorhanden, aber eher Pr\u00fcfungsstress als grundlegende Missverst\u00e4ndnisse.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler zeigt solides Verst\u00e4ndnis: Inhalt, Belegstellen, Strophenform, Reimschema und Kadenz werden korrekt erkannt und begr\u00fcndet. Unsicherheiten beim Metrum/Stilmitteln sind vorhanden, aber eher Pr\u00fcfungsstress als grundlegende Missverst\u00e4ndnisse.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 4,
+          "reasoning": "Die Sch\u00fclerin zeigt ein gutes Verst\u00e4ndnis f\u00fcr Aufbau, Reimschema, Metrum und Kadenz, benennt Stilmittel korrekt und kann zentrale Aussagen formulieren. Es gibt Unsicherheiten bei Fachbegriffen und Selbstvertrauen, aber keine fundamentalen Fehler.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Die Sch\u00fclerin zeigt ein gutes Verst\u00e4ndnis f\u00fcr Aufbau, Reimschema, Metrum und Kadenz, benennt Stilmittel korrekt und kann zentrale Aussagen formulieren. Es gibt Unsicherheiten bei Fachbegriffen und Selbstvertrauen, aber keine fundamentalen Fehler.\"\n}"
+        }
+      ],
+      "reasoning": "Der Sch\u00fcler zeigt solides Verst\u00e4ndnis: Inhalt, Belegstellen, Strophenform, Reimschema und Kadenz werden korrekt erkannt und begr\u00fcndet. Unsicherheiten beim Metrum/Stilmitteln sind vorhanden, aber eher Pr\u00fcfungsstress als grundlegende Missverst\u00e4ndnisse."
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "b09cd19f-e8f4-4587-96c7-11f2612f8040",
+      "current_level": 4,
+      "avg_level": 4.0,
+      "final_level": 4,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student correctly computes slope from two points (including handling negatives/fractions), understands slope as rate of change, and knows undefined slope corresponds to vertical lines. Their main gap is procedural confidence in writing equations (solving for b) rather than a fundamental misunderstanding.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student correctly computes slope from two points (including handling negatives/fractions), understands slope as rate of change, and knows undefined slope corresponds to vertical lines. Their main gap is procedural confidence in writing equations (solving for b) rather than a fundamental misunderstanding.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student demonstrates strong conceptual understanding, makes and corrects mistakes, and connects ideas across contexts, but still shows some confusion with procedures and notation when writing equations, indicating occasional gaps.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student demonstrates strong conceptual understanding, makes and corrects mistakes, and connects ideas across contexts, but still shows some confusion with procedures and notation when writing equations, indicating occasional gaps.\"\n}"
+        }
+      ],
+      "reasoning": "The student correctly computes slope from two points (including handling negatives/fractions), understands slope as rate of change, and knows undefined slope corresponds to vertical lines. Their main gap is procedural confidence in writing equations (solving for b) rather than a fundamental misunderstanding."
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "109acc46-a259-4e85-b843-03c14731a800",
+      "current_level": 5,
+      "avg_level": 4.5,
+      "final_level": 4,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": false,
+          "level": 4,
+          "reasoning": "The student shows strong, mostly correct understanding of plate tectonics and Earth\u2019s heat sources (radioactive decay vs primordial heat) and correctly links U/Th to silicate layers, but they still express uncertainty about where radiogenic heat is concentrated and core heating/cooling dynamics, indicating some gaps short of an advanced level.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 4,\n  \"reasoning\": \"The student shows strong, mostly correct understanding of plate tectonics and Earth\u2019s heat sources (radioactive decay vs primordial heat) and correctly links U/Th to silicate layers, but they still express uncertainty about where radiogenic heat is concentrated and core heating/cooling dynamics, indicating some gaps short of an advanced level.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 5,
+          "reasoning": "The student demonstrates advanced understanding by accurately explaining radioactive decay, element partitioning, and the thermal evolution of Earth's interior, and by reasoning through the consequences of mantle insulation on core cooling and inner core growth.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 5,\n  \"reasoning\": \"The student demonstrates advanced understanding by accurately explaining radioactive decay, element partitioning, and the thermal evolution of Earth's interior, and by reasoning through the consequences of mantle insulation on core cooling and inner core growth.\"\n}"
+        }
+      ],
+      "reasoning": "The student shows strong, mostly correct understanding of plate tectonics and Earth\u2019s heat sources (radioactive decay vs primordial heat) and correctly links U/Th to silicate layers, but they still express uncertainty about where radiogenic heat is concentrated and core heating/cooling dynamics, indicating some gaps short of an advanced level."
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "547b1c18-1933-492f-b545-c125001eeef6",
+      "current_level": 4,
+      "avg_level": 4.0,
+      "final_level": 4,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 4,
+          "reasoning": "Der Sch\u00fcler erkl\u00e4rt Newtons 1. Gesetz, Reibung als entgegen der Bewegung gerichtete Kraft, den Fall resultierender Kraft = 0 sowie Energieumwandlung korrekt und kann Reibungsarten und Anwendungen nennen. Es gibt nur kleinere Ungenauigkeiten/Alltagsformulierungen (z.B. \u201eObjekt fliegt weiter, solange nichts im Weg ist\u201c), aber keine fundamentalen Missverst\u00e4ndnisse.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler erkl\u00e4rt Newtons 1. Gesetz, Reibung als entgegen der Bewegung gerichtete Kraft, den Fall resultierender Kraft = 0 sowie Energieumwandlung korrekt und kann Reibungsarten und Anwendungen nennen. Es gibt nur kleinere Ungenauigkeiten/Alltagsformulierungen (z.B. \u201eObjekt fliegt weiter, solange nichts im Weg ist\u201c), aber keine fundamentalen Missverst\u00e4ndnisse.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 4,
+          "reasoning": "Der Sch\u00fcler zeigt ein gutes Verst\u00e4ndnis der Newtonschen Gesetze, Reibung und Energieerhaltung, kann Beispiele nennen und stellt weiterf\u00fchrende Fragen. Es gibt keine fundamentalen Fehler, aber gelegentlich Unsicherheiten bei tieferen physikalischen Details.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler zeigt ein gutes Verst\u00e4ndnis der Newtonschen Gesetze, Reibung und Energieerhaltung, kann Beispiele nennen und stellt weiterf\u00fchrende Fragen. Es gibt keine fundamentalen Fehler, aber gelegentlich Unsicherheiten bei tieferen physikalischen Details.\"\n}"
+        }
+      ],
+      "reasoning": "Der Sch\u00fcler erkl\u00e4rt Newtons 1. Gesetz, Reibung als entgegen der Bewegung gerichtete Kraft, den Fall resultierender Kraft = 0 sowie Energieumwandlung korrekt und kann Reibungsarten und Anwendungen nennen. Es gibt nur kleinere Ungenauigkeiten/Alltagsformulierungen (z.B. \u201eObjekt fliegt weiter, solange nichts im Weg ist\u201c), aber keine fundamentalen Missverst\u00e4ndnisse."
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "15230241-c8ad-43a1-9bf8-904c4a41c1c7",
+      "current_level": 5,
+      "avg_level": 4.5,
+      "final_level": 4,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 5,
+          "reasoning": "The student shows strong, accurate understanding of cardiac anatomy and circulation (including key exceptions like pulmonary artery blood oxygenation) and can reason mechanistically about pressure/resistance and pulmonary edema. Minor uncertainty is limited to terminology (mitral vs bicuspid), which they quickly resolve and does not indicate conceptual gaps.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 5,\n  \"reasoning\": \"The student shows strong, accurate understanding of cardiac anatomy and circulation (including key exceptions like pulmonary artery blood oxygenation) and can reason mechanistically about pressure/resistance and pulmonary edema. Minor uncertainty is limited to terminology (mitral vs bicuspid), which they quickly resolve and does not indicate conceptual gaps.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": false,
+          "level": 4,
+          "reasoning": "The student demonstrates strong understanding of heart anatomy, circulation, and pressure differences, but shows minor confusion about the role of gravity and the heart's function in venous return. Their questions indicate curiosity but also some uncertainty about advanced concepts.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 4,\n  \"reasoning\": \"The student demonstrates strong understanding of heart anatomy, circulation, and pressure differences, but shows minor confusion about the role of gravity and the heart's function in venous return. Their questions indicate curiosity but also some uncertainty about advanced concepts.\"\n}"
+        }
+      ],
+      "reasoning": "The student shows strong, accurate understanding of cardiac anatomy and circulation (including key exceptions like pulmonary artery blood oxygenation) and can reason mechanistically about pressure/resistance and pulmonary edema. Minor uncertainty is limited to terminology (mitral vs bicuspid), which they quickly resolve and does not indicate conceptual gaps."
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "abca8d72-5fa1-4dfc-bc73-98409e54eaa9",
+      "current_level": 4,
+      "avg_level": 4.0,
+      "final_level": 4,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student shows solid understanding of limiting reactants, mole ratios, excess reactant, and percent yield with correct reasoning and calculations. Minor imprecision in phrasing the mole ratio (\"1:2 with the oxygen\") doesn\u2019t affect the correct setup or answer, suggesting only occasional gaps.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student shows solid understanding of limiting reactants, mole ratios, excess reactant, and percent yield with correct reasoning and calculations. Minor imprecision in phrasing the mole ratio (\\\"1:2 with the oxygen\\\") doesn\u2019t affect the correct setup or answer, suggesting only occasional gaps.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student demonstrates solid understanding of limiting reactant, excess calculation, and percent yield, with clear and correct reasoning. There are no fundamental errors, but explanations are straightforward rather than deeply insightful.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student demonstrates solid understanding of limiting reactant, excess calculation, and percent yield, with clear and correct reasoning. There are no fundamental errors, but explanations are straightforward rather than deeply insightful.\"\n}"
+        }
+      ],
+      "reasoning": "The student shows solid understanding of limiting reactants, mole ratios, excess reactant, and percent yield with correct reasoning and calculations. Minor imprecision in phrasing the mole ratio (\"1:2 with the oxygen\") doesn\u2019t affect the correct setup or answer, suggesting only occasional gaps."
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "c886d970-ef56-4e8d-a097-d50abb0a61ad",
+      "current_level": 4,
+      "avg_level": 4.0,
+      "final_level": 4,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student correctly explains frequency, relates v=f\u03bb to v=\u03bb/T via f=1/T, distinguishes constructive vs destructive interference, and knows what can be read from distance vs time graphs. Their main issue is occasional confusion when reading diagrams/labels, which is a minor gap rather than a fundamental misunderstanding.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student correctly explains frequency, relates v=f\u03bb to v=\u03bb/T via f=1/T, distinguishes constructive vs destructive interference, and knows what can be read from distance vs time graphs. Their main issue is occasional confusion when reading diagrams/labels, which is a minor gap rather than a fundamental misunderstanding.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student demonstrates strong understanding of wave speed, interference, and diagram reading, including correct use of formulas and terminology in both English and German. Minor confusion with diagram reading details and occasional uncertainty with foreign labels prevent a 5.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student demonstrates strong understanding of wave speed, interference, and diagram reading, including correct use of formulas and terminology in both English and German. Minor confusion with diagram reading details and occasional uncertainty with foreign labels prevent a 5.\"\n}"
+        }
+      ],
+      "reasoning": "The student correctly explains frequency, relates v=f\u03bb to v=\u03bb/T via f=1/T, distinguishes constructive vs destructive interference, and knows what can be read from distance vs time graphs. Their main issue is occasional confusion when reading diagrams/labels, which is a minor gap rather than a fundamental misunderstanding."
+    },
+    {
+      "student_id": "c011d01c-29d4-4452-8fd7-fe84c3372f6d",
+      "topic_id": "ae58d85a-e4b7-4806-ba3a-34742f015daf",
+      "current_level": 4,
+      "avg_level": 3.5,
+      "final_level": 3,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 4,
+          "reasoning": "Der Sch\u00fcler kann zentrale Unterschiede (Meta-Wette vs. konkreter Pakt), Fausts Rolle/Verantwortung und die Ausl\u00f6sebedingung (\u201eVerweile doch\u2026\u201c) korrekt und eigenst\u00e4ndig erkl\u00e4ren. Schw\u00e4chen liegen eher in Arbeitstechnik (Textbelege/Versstellen) als in grundlegenden Verst\u00e4ndnisl\u00fccken, daher \u00fcber dem Klassenniveau, aber nicht klar \u201eadvanced\u201c.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler kann zentrale Unterschiede (Meta-Wette vs. konkreter Pakt), Fausts Rolle/Verantwortung und die Ausl\u00f6sebedingung (\u201eVerweile doch\u2026\u201c) korrekt und eigenst\u00e4ndig erkl\u00e4ren. Schw\u00e4chen liegen eher in Arbeitstechnik (Textbelege/Versstellen) als in grundlegenden Verst\u00e4ndnisl\u00fccken, daher \u00fcber dem Klassenniveau, aber nicht klar \u201eadvanced\u201c.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 3,
+          "reasoning": "Der Sch\u00fcler versteht die Kernunterschiede zwischen Wette und Pakt sowie deren Bedeutung f\u00fcr Interpretation und Verantwortung, zeigt aber Unsicherheit und wenig Routine beim Umgang mit Textbelegen/Zitaten \u2013 ein zentrales Anforderungsfeld auf Abiturniveau.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"Der Sch\u00fcler versteht die Kernunterschiede zwischen Wette und Pakt sowie deren Bedeutung f\u00fcr Interpretation und Verantwortung, zeigt aber Unsicherheit und wenig Routine beim Umgang mit Textbelegen/Zitaten \u2013 ein zentrales Anforderungsfeld auf Abiturniveau.\"\n}"
+        }
+      ],
+      "reasoning": "Der Sch\u00fcler kann zentrale Unterschiede (Meta-Wette vs. konkreter Pakt), Fausts Rolle/Verantwortung und die Ausl\u00f6sebedingung (\u201eVerweile doch\u2026\u201c) korrekt und eigenst\u00e4ndig erkl\u00e4ren. Schw\u00e4chen liegen eher in Arbeitstechnik (Textbelege/Versstellen) als in grundlegenden Verst\u00e4ndnisl\u00fccken, daher \u00fcber dem Klassenniveau, aber nicht klar \u201eadvanced\u201c."
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "40d4a6eb-a410-43df-bd0d-236cc1fc3d71",
+      "current_level": 4,
+      "avg_level": 4.0,
+      "final_level": 4,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 4,
+          "reasoning": "Student consistently applies core probability rules correctly (independence multiplication, complement for \u201cat least one,\u201d without/with replacement, inclusion\u2013exclusion, and union for independent events). Minor arithmetic slip on \u201cat least one 6\u201d (should be 11/36? actually 1-(5/6)^2=11/36 correct) and otherwise shows strong conceptual understanding with no fundamental gaps, fitting above-grade rather than advanced.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Student consistently applies core probability rules correctly (independence multiplication, complement for \u201cat least one,\u201d without/with replacement, inclusion\u2013exclusion, and union for independent events). Minor arithmetic slip on \u201cat least one 6\u201d (should be 11/36? actually 1-(5/6)^2=11/36 correct) and otherwise shows strong conceptual understanding with no fundamental gaps, fitting above-grade rather than advanced.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student consistently applies correct probability rules, explains reasoning clearly, and avoids fundamental errors. Minor imprecision in language and lack of deeper insight prevent a 5, but performance is solidly above grade.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student consistently applies correct probability rules, explains reasoning clearly, and avoids fundamental errors. Minor imprecision in language and lack of deeper insight prevent a 5, but performance is solidly above grade.\"\n}"
+        }
+      ],
+      "reasoning": "Student consistently applies core probability rules correctly (independence multiplication, complement for \u201cat least one,\u201d without/with replacement, inclusion\u2013exclusion, and union for independent events). Minor arithmetic slip on \u201cat least one 6\u201d (should be 11/36? actually 1-(5/6)^2=11/36 correct) and otherwise shows strong conceptual understanding with no fundamental gaps, fitting above-grade rather than advanced."
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "cea92f7f-bf62-411b-ba28-a17be006de5d",
+      "current_level": 4,
+      "avg_level": 3.5,
+      "final_level": 3,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student accurately defines distribution vs. density, identifies key physical factors and map patterns, and correctly explains physiological density and the limitation of averages. The last inference about high arithmetic but low physiological density is a bit uncertain/atypical, but their conclusion (abundant arable land relative to population) is reasonable, so overall performance is above grade with minor gaps.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student accurately defines distribution vs. density, identifies key physical factors and map patterns, and correctly explains physiological density and the limitation of averages. The last inference about high arithmetic but low physiological density is a bit uncertain/atypical, but their conclusion (abundant arable land relative to population) is reasonable, so overall performance is above grade with minor gaps.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": false,
+          "level": 3,
+          "reasoning": "The student demonstrates solid understanding of core concepts and vocabulary, but the explanation of high arithmetic density with low physiological density is incorrect, indicating a fundamental misunderstanding of these measures.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 3,\n  \"reasoning\": \"The student demonstrates solid understanding of core concepts and vocabulary, but the explanation of high arithmetic density with low physiological density is incorrect, indicating a fundamental misunderstanding of these measures.\"\n}"
+        }
+      ],
+      "reasoning": "The student accurately defines distribution vs. density, identifies key physical factors and map patterns, and correctly explains physiological density and the limitation of averages. The last inference about high arithmetic but low physiological density is a bit uncertain/atypical, but their conclusion (abundant arable land relative to population) is reasonable, so overall performance is above grade with minor gaps."
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "20f41fb6-7693-4381-a48b-4ccbe5cf4fcd",
+      "current_level": 4,
+      "avg_level": 4.0,
+      "final_level": 4,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 4,
+          "reasoning": "Der Sch\u00fcler beherrscht Formel, Anwendungsbedingung (rechtwinklig), Hypotenuse/Zuordnung und kann die Variablen korrekt umbenennen sowie die Beziehung \u201egr\u00f6\u00dfter Winkel \u2194 l\u00e4ngste Seite\u201c sicher anwenden. Die Nachfragen sind eher vertiefend/konzeptuell und zeigen keine grundlegenden Missverst\u00e4ndnisse.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler beherrscht Formel, Anwendungsbedingung (rechtwinklig), Hypotenuse/Zuordnung und kann die Variablen korrekt umbenennen sowie die Beziehung \u201egr\u00f6\u00dfter Winkel \u2194 l\u00e4ngste Seite\u201c sicher anwenden. Die Nachfragen sind eher vertiefend/konzeptuell und zeigen keine grundlegenden Missverst\u00e4ndnisse.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student consistently applies core concepts correctly, shows clear understanding of the Pythagorean theorem, and reasons well about triangle properties. There are minor uncertainties about edge cases (nearly degenerate triangles), but no fundamental misunderstandings.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student consistently applies core concepts correctly, shows clear understanding of the Pythagorean theorem, and reasons well about triangle properties. There are minor uncertainties about edge cases (nearly degenerate triangles), but no fundamental misunderstandings.\"\n}"
+        }
+      ],
+      "reasoning": "Der Sch\u00fcler beherrscht Formel, Anwendungsbedingung (rechtwinklig), Hypotenuse/Zuordnung und kann die Variablen korrekt umbenennen sowie die Beziehung \u201egr\u00f6\u00dfter Winkel \u2194 l\u00e4ngste Seite\u201c sicher anwenden. Die Nachfragen sind eher vertiefend/konzeptuell und zeigen keine grundlegenden Missverst\u00e4ndnisse."
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "54a9dadd-6dfb-4f82-a2a1-0e6e90363142",
+      "current_level": 3,
+      "avg_level": 3.0,
+      "final_level": 3,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 3,
+          "reasoning": "The student correctly understands transcription directionality (template read 3'\u21925', RNA built 5'\u21923') and can derive mRNA from both coding and template strands. Confusion is mainly terminology-based (German labels), not a conceptual misunderstanding, and they self-correct with guidance.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student correctly understands transcription directionality (template read 3'\u21925', RNA built 5'\u21923') and can derive mRNA from both coding and template strands. Confusion is mainly terminology-based (German labels), not a conceptual misunderstanding, and they self-correct with guidance.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 3,
+          "reasoning": "The student understands the core concepts of transcription, directionality, and base-pairing, but still shows some confusion with terminology and needs to solidify understanding of strand naming conventions. Occasional uncertainty keeps them at grade level.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student understands the core concepts of transcription, directionality, and base-pairing, but still shows some confusion with terminology and needs to solidify understanding of strand naming conventions. Occasional uncertainty keeps them at grade level.\"\n}"
+        }
+      ],
+      "reasoning": "The student correctly understands transcription directionality (template read 3'\u21925', RNA built 5'\u21923') and can derive mRNA from both coding and template strands. Confusion is mainly terminology-based (German labels), not a conceptual misunderstanding, and they self-correct with guidance."
+    },
+    {
+      "student_id": "99e2ce0b-5773-4d01-b084-05c663438d3c",
+      "topic_id": "a42d788d-497b-4823-bc9f-09821081ee53",
+      "current_level": 5,
+      "avg_level": 4.0,
+      "final_level": 4,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": false,
+          "level": 4,
+          "reasoning": "Der Sch\u00fcler erkl\u00e4rt Gruppen/Perioden/Ordnungszahl und Isotope korrekt und hat ein gutes qualitatives Verst\u00e4ndnis der kurzreichweitigen starken Kernkraft. Es gibt aber noch grundlegende Unsicherheiten/Misskonzepte (z.B. \u201estarke Kernkraft = eine Art Magnetismus\u201c, falsche Gewichtung der Stabilit\u00e4tsprobleme bei gro\u00dfen Kernen), daher nicht klar \u201eAdvanced\u201c.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler erkl\u00e4rt Gruppen/Perioden/Ordnungszahl und Isotope korrekt und hat ein gutes qualitatives Verst\u00e4ndnis der kurzreichweitigen starken Kernkraft. Es gibt aber noch grundlegende Unsicherheiten/Misskonzepte (z.B. \u201estarke Kernkraft = eine Art Magnetismus\u201c, falsche Gewichtung der Stabilit\u00e4tsprobleme bei gro\u00dfen Kernen), daher nicht klar \u201eAdvanced\u201c.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": false,
+          "level": 4,
+          "reasoning": "Der Sch\u00fcler zeigt ein sehr gutes Verst\u00e4ndnis f\u00fcr die Kernkr\u00e4fte, Isotope und deren chemische Eigenschaften, stellt aber wiederholt grundlegende R\u00fcckfragen (z.B. zur Radioaktivit\u00e4t und Isotopenstabilit\u00e4t) und ist sich bei Details manchmal unsicher. F\u00fcr Level 5 fehlt die durchgehend sichere, vertiefte Erkl\u00e4rung ohne Nachfragen.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 4,\n  \"reasoning\": \"Der Sch\u00fcler zeigt ein sehr gutes Verst\u00e4ndnis f\u00fcr die Kernkr\u00e4fte, Isotope und deren chemische Eigenschaften, stellt aber wiederholt grundlegende R\u00fcckfragen (z.B. zur Radioaktivit\u00e4t und Isotopenstabilit\u00e4t) und ist sich bei Details manchmal unsicher. F\u00fcr Level 5 fehlt die durchgehend sichere, vertiefte Erkl\u00e4rung ohne Nachfragen.\"\n}"
+        }
+      ],
+      "reasoning": "Der Sch\u00fcler erkl\u00e4rt Gruppen/Perioden/Ordnungszahl und Isotope korrekt und hat ein gutes qualitatives Verst\u00e4ndnis der kurzreichweitigen starken Kernkraft. Es gibt aber noch grundlegende Unsicherheiten/Misskonzepte (z.B. \u201estarke Kernkraft = eine Art Magnetismus\u201c, falsche Gewichtung der Stabilit\u00e4tsprobleme bei gro\u00dfen Kernen), daher nicht klar \u201eAdvanced\u201c."
+    },
+    {
+      "student_id": "654b4823-23a0-4c1f-a9cb-3c2d5f0e403a",
+      "topic_id": "44853114-7c3e-4d43-bc47-83dca5380613",
+      "current_level": 4,
+      "avg_level": 4.0,
+      "final_level": 4,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student accurately recalls key events/dates (Bastille, Tennis Court Oath) and core causes (tax burden on the Third Estate) and can use a correct analytical frame (popular sovereignty) with minor uncertainty about connecting Enlightenment ideas to later events. Gaps are more about confidence and depth of explanation than fundamental misunderstandings.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student accurately recalls key events/dates (Bastille, Tennis Court Oath) and core causes (tax burden on the Third Estate) and can use a correct analytical frame (popular sovereignty) with minor uncertainty about connecting Enlightenment ideas to later events. Gaps are more about confidence and depth of explanation than fundamental misunderstandings.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": true,
+          "level": 4,
+          "reasoning": "The student demonstrates strong factual recall, can connect Enlightenment ideas to events, and is actively seeking to improve analysis. However, there is some uncertainty about applying concepts to different contexts and a reliance on memorization over deeper understanding.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 4,\n  \"reasoning\": \"The student demonstrates strong factual recall, can connect Enlightenment ideas to events, and is actively seeking to improve analysis. However, there is some uncertainty about applying concepts to different contexts and a reliance on memorization over deeper understanding.\"\n}"
+        }
+      ],
+      "reasoning": "The student accurately recalls key events/dates (Bastille, Tennis Court Oath) and core causes (tax burden on the Third Estate) and can use a correct analytical frame (popular sovereignty) with minor uncertainty about connecting Enlightenment ideas to later events. Gaps are more about confidence and depth of explanation than fundamental misunderstandings."
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "dfe21df4-4310-414b-be39-6eb8a47f8dc1",
+      "current_level": 3,
+      "avg_level": 2.5,
+      "final_level": 2,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": true,
+          "level": 3,
+          "reasoning": "The student has the big-picture timeline and can reason through key steps (presidential appointment, Reichstag Fire leading to civil-rights suspension) with only partial recall. They show a common misconception about dictatorships requiring revolution and have difficulty with detailed Weimar politics and primary-source reading, consistent with at-grade understanding but not above.",
+          "raw": "{\n  \"agree\": true,\n  \"final_level\": 3,\n  \"reasoning\": \"The student has the big-picture timeline and can reason through key steps (presidential appointment, Reichstag Fire leading to civil-rights suspension) with only partial recall. They show a common misconception about dictatorships requiring revolution and have difficulty with detailed Weimar politics and primary-source reading, consistent with at-grade understanding but not above.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": false,
+          "level": 2,
+          "reasoning": "The student shows confusion about key political steps in Hitler's rise and struggles with document analysis, especially parsing complex sentences. There are repeated uncertainties about core concepts, indicating below grade-level understanding.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 2,\n  \"reasoning\": \"The student shows confusion about key political steps in Hitler's rise and struggles with document analysis, especially parsing complex sentences. There are repeated uncertainties about core concepts, indicating below grade-level understanding.\"\n}"
+        }
+      ],
+      "reasoning": "The student has the big-picture timeline and can reason through key steps (presidential appointment, Reichstag Fire leading to civil-rights suspension) with only partial recall. They show a common misconception about dictatorships requiring revolution and have difficulty with detailed Weimar politics and primary-source reading, consistent with at-grade understanding but not above."
+    },
+    {
+      "student_id": "5417fe47-35aa-46b7-a811-566b14546422",
+      "topic_id": "e75186c1-b457-4276-abc3-45a7d5ceef6c",
+      "current_level": 3,
+      "avg_level": 2.0,
+      "final_level": 2,
+      "model_votes": [
+        {
+          "model": "gpt-5.2",
+          "agree": false,
+          "level": 2,
+          "reasoning": "Der Sch\u00fcler hat grundlegende Begriffe wie Gattung/episch und zentrale Dramenstruktur-Begriffe (Exposition, Peripetie) nicht verstanden und zeigt unsichere, teils falsche Vereinfachungen (z. B. Gedicht = Reim). Einzelne richtige Intuitionen (Akt/Szene, H\u00f6hepunkt vs. Wendepunkt) reichen noch nicht f\u00fcr Niveau 3.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 2,\n  \"reasoning\": \"Der Sch\u00fcler hat grundlegende Begriffe wie Gattung/episch und zentrale Dramenstruktur-Begriffe (Exposition, Peripetie) nicht verstanden und zeigt unsichere, teils falsche Vereinfachungen (z. B. Gedicht = Reim). Einzelne richtige Intuitionen (Akt/Szene, H\u00f6hepunkt vs. Wendepunkt) reichen noch nicht f\u00fcr Niveau 3.\"\n}"
+        },
+        {
+          "model": "gpt-4.1",
+          "agree": false,
+          "level": 2,
+          "reasoning": "The student shows basic understanding of some terms but confuses key concepts (e.g., Peripetie vs. H\u00f6hepunkt) and lacks clarity on fundamental genre distinctions and structure. There are repeated uncertainties and misconceptions.",
+          "raw": "{\n  \"agree\": false,\n  \"final_level\": 2,\n  \"reasoning\": \"The student shows basic understanding of some terms but confuses key concepts (e.g., Peripetie vs. H\u00f6hepunkt) and lacks clarity on fundamental genre distinctions and structure. There are repeated uncertainties and misconceptions.\"\n}"
+        }
+      ],
+      "reasoning": "Der Sch\u00fcler hat grundlegende Begriffe wie Gattung/episch und zentrale Dramenstruktur-Begriffe (Exposition, Peripetie) nicht verstanden und zeigt unsichere, teils falsche Vereinfachungen (z. B. Gedicht = Reim). Einzelne richtige Intuitionen (Akt/Szene, H\u00f6hepunkt vs. Wendepunkt) reichen noch nicht f\u00fcr Niveau 3."
+    }
+  ],
+  "mse_response": {
+    "mse_score": 0.4642857142857143,
+    "num_predictions": 28,
+    "submission_number": 33,
+    "submissions_remaining": 67
+  }
+}

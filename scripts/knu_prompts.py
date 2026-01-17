@@ -15,12 +15,12 @@ Understanding levels:
 Be concise and kind. Ask diagnostic questions when needed.
 Do not mention that you are scoring or inferring a level.
 Conversation phases:
-- Turns 1-2: diagnostic only. Ask short questions to gauge understanding. Do not teach or explain yet.
+- Turns 1-4: diagnostic only. Ask short questions to gauge understanding. Do not teach or explain yet.
 - Turn 1 should be a longer diagnostic block with 4-6 short questions that cover:
   definition/terminology, a simple computation, a basic application, and a common misconception check.
   Make them high-signal and easy to answer. Ask for answers in a numbered list to reduce ambiguity.
-- At the end of turn 2, internally lock a level and switch to tutoring.
-- Turns 3-10: teach and tutor based on the locked level.
+- At the end of turn 4, internally lock a level and switch to tutoring.
+- Turns 5-10: teach and tutor based on the locked level.
 
 Level-locked tutoring:
 IF level 1-2:
@@ -91,10 +91,10 @@ Scoring gates:
 - If there is a key misconception or repeated uncertainty, cap at Level 3.
 
 Return a JSON object with:
-{
+{{
   "level": <integer 1-5>,
   "rationale": "<one short sentence>"
-}
+}}
 
 Student: {name}, grade {grade}
 Topic: {topic} ({subject})
@@ -120,14 +120,14 @@ Conversation:
 {transcript}
 
 Return JSON only:
-{
+{{
   "agree": <true|false>,
   "final_level": <integer 1-5>,
   "reasoning": "<1-2 sentences>"
-}
+}}
 """,
     "B": """You are validating a predicted understanding level.
-This conversation contains only the first 2 diagnostic turns (no tutoring).
+This conversation contains only the first 4 diagnostic turns (no tutoring).
 
 Use the general rubric across subjects:
 1 = Struggling (needs fundamentals)
@@ -145,14 +145,14 @@ Conversation:
 {transcript}
 
 Return JSON only:
-{
+{{
   "agree": <true|false>,
   "final_level": <integer 1-5>,
   "reasoning": "<1-2 sentences>"
-}
+}}
 """,
     "C": """You are validating a predicted understanding level.
-This conversation contains only the first 2 diagnostic turns (no tutoring).
+This conversation contains only the first 4 diagnostic turns (no tutoring).
 
 Use the general rubric across subjects:
 1 = Struggling (needs fundamentals)
@@ -170,14 +170,14 @@ Conversation:
 {transcript}
 
 Return JSON only:
-{
+{{
   "agree": <true|false>,
   "final_level": <integer 1-5>,
   "reasoning": "<1-2 sentences>"
-}
+}}
 """,
     "D": """You are validating a predicted understanding level.
-This conversation contains only the first 2 diagnostic turns (no tutoring).
+This conversation contains only the first 4 diagnostic turns (no tutoring).
 
 Use the general rubric across subjects:
 1 = Struggling (needs fundamentals)
@@ -195,14 +195,14 @@ Conversation:
 {transcript}
 
 Return JSON only:
-{
+{{
   "agree": <true|false>,
   "final_level": <integer 1-5>,
   "reasoning": "<1-2 sentences>"
-}
+}}
 """,
     "E": """You are validating a predicted understanding level.
-This conversation contains only the first 2 diagnostic turns (no tutoring).
+This conversation contains only the first 4 diagnostic turns (no tutoring).
 
 Use the general rubric across subjects:
 1 = Struggling (needs fundamentals)
@@ -220,11 +220,11 @@ Conversation:
 {transcript}
 
 Return JSON only:
-{
+{{
   "agree": <true|false>,
   "final_level": <integer 1-5>,
   "reasoning": "<1-2 sentences>"
-}
+}}
 """,
 }
 
@@ -246,10 +246,10 @@ Behavioral signals to weigh:
 - Engagement (curiosity, deeper questions)
 
 Return a JSON object with:
-{
+{{
   "level": <integer 1-5>,
   "rationale": "<one short sentence>"
-}
+}}
 
 Student: {name}, grade {grade}
 Topic: {topic} ({subject})
@@ -273,10 +273,10 @@ Rubric (general across subjects):
 5: consistently correct; anticipates or explains beyond the question.
 
 Return JSON only:
-{
+{{
   "level": <integer 1-5>,
   "rationale": "<one short sentence>"
-}
+}}
 
 Student: {name}, grade {grade}
 Topic: {topic} ({subject})
@@ -300,10 +300,10 @@ Rubric (general across subjects):
 5: deep conceptual understanding; asks advanced extensions.
 
 Return JSON only:
-{
+{{
   "level": <integer 1-5>,
   "rationale": "<one short sentence>"
-}
+}}
 
 Student: {name}, grade {grade}
 Topic: {topic} ({subject})

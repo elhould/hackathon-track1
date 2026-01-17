@@ -57,6 +57,7 @@ Examples:
 ./scripts/knu_auto_chat.py
 ./scripts/knu_auto_chat.py --set-type mini_dev --model gpt-5.2 --mode responses
 ./scripts/knu_auto_chat.py --max-turns 6
+./scripts/knu_auto_chat.py --max-parallel 10
 ```
 
 Notes:
@@ -64,6 +65,7 @@ Notes:
 - Writes a `conversation_summary` entry with the full transcript and prediction
   to `logs/conversations.jsonl`.
 - Use `--mode chat` if your account does not support the responses API.
+- Use `--max-parallel` to limit parallel conversations (default 10).
 
 ### `scripts/knu_submit_mse.py`
 
@@ -185,11 +187,15 @@ Examples:
 ```
 ./scripts/knu_rejudge_ensemble.py --input dev_conversations.jsonl --prompt-version A --models gpt-5.2,gpt-4o-mini,gpt-4.1-mini
 ./scripts/knu_rejudge_ensemble.py --input dev_conversations.jsonl --prompt-version A --models gpt-5.2,gpt-4o-mini,gpt-4.1-mini --submit-mse
+./scripts/knu_rejudge_ensemble.py --input dev_conversations.jsonl --prompt-version A --models gpt-5.2,gpt-4o-mini,gpt-4.1-mini --max-parallel 10
+./scripts/knu_rejudge_ensemble.py --input dev_conversations.jsonl --prompt-version A --models gpt-5.2,gpt-4o-mini,gpt-4.1-mini --rounding up
 ```
 
 Notes:
 - Uses diagnostic turns only.
 - If you don’t have access to a model, remove it from `--models`.
+- Use `--max-parallel` to limit concurrent rejudge requests (default 10).
+- Use `--rounding` to control how the ensemble average is rounded (nearest, up, down).
 
 ### `scripts/knu_infer_truth.py`
 

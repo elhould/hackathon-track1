@@ -5,6 +5,8 @@ import os
 import time
 from pathlib import Path
 import re
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from urllib.parse import urlencode
@@ -13,6 +15,10 @@ from knu_prompts import (
     CONVERSATION_SYSTEM_PROMPT_TEMPLATE,
     PREDICTION_PROMPT_TEMPLATE,
 )
+
+
+_LOG_LOCK = threading.Lock()
+_PRINT_LOCK = threading.Lock()
 
 
 
@@ -103,9 +109,15 @@ def openai_call(
 def log_event(log_file: Path, event: str, data: dict) -> None:
     log_file.parent.mkdir(parents=True, exist_ok=True)
     payload = {"event": event, **data}
-    log_file.write_text("", encoding="utf-8") if not log_file.exists() else None
-    with log_file.open("a", encoding="utf-8") as fh:
-        fh.write(json.dumps(payload, ensure_ascii=True) + "\n")
+    with _LOG_LOCK:
+        log_file.write_text("", encoding="utf-8") if not log_file.exists() else None
+        with log_file.open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps(payload, ensure_ascii=True) + "\n")
+
+
+def safe_print(message: str) -> None:
+    with _PRINT_LOCK:
+        print(message, flush=True)
 
 
 def api_get(base_url: str, api_key: str, path: str, query: dict | None = None) -> dict:
@@ -222,10 +234,9 @@ def run_conversation(
     if turn_cap is not None:
         max_turns = min(max_turns, turn_cap)
 
-    print(
+    safe_print(
         f"\nConversation started: {student.get('name')} / {topic.get('name')} "
-        f"(id={conversation_id}, max_turns={max_turns})",
-        flush=True,
+        f"(id={conversation_id}, max_turns={max_turns})"
     )
 
     system_prompt = build_system_prompt(student, topic)
@@ -234,7 +245,7 @@ def run_conversation(
     locked_prediction: dict | None = None
 
     for turn in range(1, max_turns + 1):
-        phase = "diagnostic" if turn <= 2 else "tutoring"
+        phase = "diagnostic" if turn <= 4 else "tutoring"
         turn_directive = (
             f"Turn {turn} of {max_turns}. Phase: {phase}. "
             "Diagnostic phase: ask short questions only; no teaching. "
@@ -252,7 +263,7 @@ def run_conversation(
             }
         )
 
-        print(f"Turn {turn} tutor: {normalize(tutor_message)}", flush=True)
+        safe_print(f"Turn {turn} tutor: {normalize(tutor_message)}")
 
         resp = api_post(
             base_url,
@@ -275,13 +286,13 @@ def run_conversation(
 
         student_response = resp.get("student_response", "")
         if student_response:
-            print(f"Turn {turn} student: {normalize(student_response)}", flush=True)
+            safe_print(f"Turn {turn} student: {normalize(student_response)}")
             messages.append({"role": "user", "content": student_response})
             turns.append(
                 {"role": "student", "turn": turn, "phase": phase, "content": student_response}
             )
 
-        if turn == 2 and locked_prediction is None:
+        if turn == 4 and locked_prediction is None:
             diagnostic_turns = [t for t in turns if t.get("phase") == "diagnostic"]
             level, raw, rationale = predict_level(
                 openai_key, model, mode, student, topic, diagnostic_turns
@@ -293,7 +304,7 @@ def run_conversation(
                 "rationale": rationale,
                 "phase": "diagnostic",
             }
-            print(f"Locked diagnostic level: {level}", flush=True)
+            safe_print(f"Locked diagnostic level: {level}")
             log_event(
                 log_file,
                 "locked_prediction",
@@ -307,7 +318,7 @@ def run_conversation(
             )
 
         if resp.get("is_complete") is True:
-            print("Conversation complete (server signaled max turns).", flush=True)
+            safe_print("Conversation complete (server signaled max turns).")
             break
 
         if sleep_s > 0:
@@ -325,7 +336,7 @@ def run_conversation(
             "rationale": rationale,
             "phase": "diagnostic",
         }
-        print(f"Locked diagnostic level: {level}", flush=True)
+        safe_print(f"Locked diagnostic level: {level}")
 
     log_event(
         log_file,
@@ -355,6 +366,12 @@ def main() -> int:
     parser.add_argument("--sleep", type=float, default=0.2, help="Sleep between turns (seconds)")
     parser.add_argument("--max-turns", type=int, default=None, help="Cap turns per conversation")
     parser.add_argument(
+        "--max-parallel",
+        type=int,
+        default=10,
+        help="Max parallel conversations (student/topic pairs)",
+    )
+    parser.add_argument(
         "--submit-mse",
         action="store_true",
         help="Submit predictions to /evaluate/mse after conversations finish",
@@ -379,9 +396,8 @@ def main() -> int:
 
     base_url = base_url.rstrip("/")
 
-    print(
-        f"Running auto-chat: set={args.set_type}, model={args.model}, mode={args.mode}",
-        flush=True,
+    safe_print(
+        f"Running auto-chat: set={args.set_type}, model={args.model}, mode={args.mode}"
     )
 
     students_resp = api_get(base_url, team_api_key, "/students", {"set_type": args.set_type})
@@ -389,15 +405,23 @@ def main() -> int:
     if not students:
         raise SystemExit(f"No students found for set_type={args.set_type}")
 
-    predictions: list[dict] = []
-
+    pairs: list[tuple[dict, dict]] = []
     for student in students:
         topics_resp = api_get(base_url, team_api_key, f"/students/{student['id']}/topics")
         topics = topics_resp.get("topics", [])
-        if not topics:
-            continue
         for topic in topics:
-            pred = run_conversation(
+            pairs.append((student, topic))
+
+    if not pairs:
+        raise SystemExit(f"No student/topic pairs found for set_type={args.set_type}")
+
+    predictions: list[dict] = []
+    max_parallel = args.max_parallel if args.max_parallel > 0 else 1
+    worker_count = min(max_parallel, len(pairs))
+    with ThreadPoolExecutor(max_workers=worker_count) as executor:
+        future_map = {
+            executor.submit(
+                run_conversation,
                 base_url,
                 team_api_key,
                 openai_api_key,
@@ -408,20 +432,30 @@ def main() -> int:
                 topic,
                 args.sleep,
                 args.max_turns,
-            )
+            ): (student, topic)
+            for student, topic in pairs
+        }
+        for future in as_completed(future_map):
+            try:
+                pred = future.result()
+            except Exception as exc:
+                student, topic = future_map[future]
+                raise RuntimeError(
+                    f"Conversation failed for {student.get('id')} {topic.get('id')}: {exc}"
+                ) from exc
             predictions.append(pred)
 
     if args.submit_mse:
         if not predictions:
             raise SystemExit("No predictions generated; nothing to submit.")
-        print("Submitting predictions to /evaluate/mse...", flush=True)
+        safe_print("Submitting predictions to /evaluate/mse...")
         resp = api_post(
             base_url,
             team_api_key,
             "/evaluate/mse",
             {"set_type": args.set_type, "predictions": predictions},
         )
-        print(json.dumps(resp, ensure_ascii=True, indent=2), flush=True)
+        safe_print(json.dumps(resp, ensure_ascii=True, indent=2))
 
     return 0
 
