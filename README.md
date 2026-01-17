@@ -128,6 +128,21 @@ Examples:
 Notes:
 - Forwards any args to `knu_score_only.py` (except `--prompt-version` and `--submit-mse`).
 
+### `scripts/knu_self_report.py`
+
+Asks each student to self-report their understanding level (1–5) and submits to `/evaluate/mse`.
+
+Examples:
+
+```
+./scripts/knu_self_report.py --set-type mini_dev
+./scripts/knu_self_report.py --set-type mini_dev --no-submit-mse
+```
+
+Notes:
+- If the student does not return a number, the script can use an LLM to map their reply to 1–5.
+- Disable LLM mapping with `--no-llm-parse` (defaults to 3 when non-numeric).
+
 ### `scripts/knu_infer_truth.py`
 
 Infers true levels for `mini_dev` using controlled MSE probes (multiple submissions).

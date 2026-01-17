@@ -8,3 +8,4 @@
 - 2026-01-16: Locked diagnostic level after turn 5 and used it for MSE predictions/logging.
 - 2026-01-16: Reviewed latest conversations to refine level-inference prompt guidance.
 - 2026-01-16: Tightened scoring prompt to be stricter when fundamental issues appear.
+- 2026-01-16: Added self-report script to ask students for a 1–5 understanding level and submit to MSE.
