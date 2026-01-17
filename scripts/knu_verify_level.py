@@ -134,6 +134,7 @@ def main():
     parser.add_argument("--logs", default="logs/conversations.jsonl", help="Path to log file")
     parser.add_argument("--out", default="logs/verified_levels.json", help="Path to output json")
     parser.add_argument("--model", default="gpt-4o", help="Verification model to use")
+    parser.add_argument("--fix", action="store_true", help="Update the log file with verified levels if they differ")
     args = parser.parse_args()
     
     repo_root = Path(__file__).resolve().parents[1]
@@ -154,12 +155,19 @@ def main():
     conversations = parse_logs(log_path)
     
     results = []
+    corrections_made = 0
     
     print(f"Found {len(conversations)} conversations. Verifying...")
     
+    # We need to read the raw lines to likely update them if --fix is on
+    raw_lines = []
+    if args.fix:
+        with open(log_path, 'r', encoding='utf-8') as f:
+            raw_lines = [line.strip() for line in f]
+    
     for cid, data in conversations.items():
         turns = data["turns"]
-        # Only verify completed conversations (those with summary)
+        # Only verify completed conversations (those with summary or sufficient length)
         if not turns:
             continue
             
@@ -190,7 +198,39 @@ def main():
         }
         results.append(result_entry)
         print(f" Done. Orig: {orig_level} -> Veri: {verified_level} ({'MATCH' if match else 'DIFF'})")
-        
+
+        # -- FIX LOGIC --
+        if args.fix and not match and verified_level is not None:
+            # Find the line that has this prediction and update it
+            # The 'prediction' object in data comes from 'conversation_summary' or 'locked_prediction'
+            # We need to be careful. The log file has multiple events.
+            # We want to update the SOURCE of the prediction. 
+            # Usually 'locked_prediction' or 'prediction_update'.
+            
+            # Strategy: Scan raw_lines for events matching this conversation_id AND having a 'prediction' field
+            # Update the LAST such event found (or all? Usually the summary reflects the last state).
+            # To be safe, we update "locked_prediction" and "prediction_update" events for this CID.
+            
+            updated_any = False
+            for i, line in enumerate(raw_lines):
+                if not line: continue
+                try:
+                    evt = json.loads(line)
+                except: continue
+                
+                if evt.get("conversation_id") == cid:
+                    # Update 'locked_prediction' or 'prediction_update'
+                    if evt.get("event") in ["locked_prediction", "prediction_update"]:
+                        if "prediction" in evt:
+                            evt["prediction"]["level"] = verified_level
+                            evt["prediction"]["rationale"] += f" [Supervisor Correction: {verification.get('reasoning')}]"
+                            raw_lines[i] = json.dumps(evt)
+                            updated_any = True
+                            
+            if updated_any:
+                corrections_made += 1
+
+    # Save results
     out_path = Path(args.out)
     if not out_path.is_absolute():
         out_path = repo_root / args.out
@@ -199,6 +239,15 @@ def main():
         json.dump(results, f, indent=2)
         
     print(f"\nVerification complete. Results saved to {out_path}")
+    
+    if args.fix and corrections_made > 0:
+        print(f"Applying {corrections_made} corrections to {log_path}...")
+        with open(log_path, 'w', encoding='utf-8') as f:
+            for line in raw_lines:
+                f.write(line + "\n")
+        print("Log file updated.")
+    elif args.fix:
+        print("No corrections needed (all matched or no new levels found).")
 
 if __name__ == "__main__":
     main()

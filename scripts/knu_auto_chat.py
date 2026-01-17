@@ -225,7 +225,16 @@ Your checking the quality of the Tutor's response before it is sent to the stude
    - Does the student's actual reasoning level match the 'Assigned Student Level' provided below?
    - If the student seems clearly HIGHER than the assigned level, REJECT and say "Student understanding is higher than Level X".
    - If the student seems clearly LOWER than the assigned level, REJECT and say "Student is struggling more than Level X".
+# 4) INTERACTION STRATEGY
+- **Turn 1 (Diagnostic)**: Ask a question that requires applying the concept, not just reciting it.
+- **Turns 2+ (Adaptive)**:
+    - If student is struggling: Simplify, break it down (Level 1-2).
+    - If student is accurate: **PROBE DEEPER**. Do not just accept a correct answer.
+      - Ask "Why does that work?" or "What would happen if we changed X?" (Level 4/5 Check).
+      - **CRITICAL**: You CANNOT classify a student as Level 4 or 5 unless they have successfully answered a "Probing Question" that tests deep understanding or transfer.
+- **Tone**: Encouraging but professional. Do NOT give away the answer. Use hints.
 
+# 5) LOCKING & RE-EVALUATION ONLY)
 ## OUTPUT FORMAT (JSON ONLY)
 Return a single JSON object:
 {
@@ -876,6 +885,12 @@ def main() -> int:
         action="store_true",
         help="Submit predictions to /evaluate/mse after conversations finish",
     )
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=10,
+        help="Number of parallel workers for conversations (default: 10)"
+    )
     args = parser.parse_args()
 
     repo_root = Path(__file__).resolve().parents[1]
@@ -908,13 +923,28 @@ def main() -> int:
 
     predictions: list[dict] = []
 
+    import concurrent.futures
+
+    # Collect all tasks first
+    tasks = []
     for student in students:
         topics_resp = api_get(base_url, team_api_key, f"/students/{student['id']}/topics")
         topics = topics_resp.get("topics", [])
         if not topics:
             continue
         for topic in topics:
-            pred = run_conversation(
+            tasks.append((student, topic))
+
+    predictions: list[dict] = []
+    
+    # Process in parallel
+    workers = args.workers if hasattr(args, "workers") else 10
+    print(f"Starting {len(tasks)} conversations with {workers} workers...", flush=True)
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as executor:
+        future_to_task = {
+            executor.submit(
+                run_conversation,
                 base_url,
                 team_api_key,
                 openai_api_key,
@@ -925,8 +955,17 @@ def main() -> int:
                 topic,
                 args.sleep,
                 args.max_turns,
-            )
-            predictions.append(pred)
+            ): (student, topic)
+            for student, topic in tasks
+        }
+        
+        for future in concurrent.futures.as_completed(future_to_task):
+            student_task, topic_task = future_to_task[future]
+            try:
+                pred = future.result()
+                predictions.append(pred)
+            except Exception as exc:
+                print(f"Conversation generated an exception for student {student_task.get('name')}: {exc}", flush=True)
 
     if args.submit_mse:
         if not predictions:
