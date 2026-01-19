@@ -1,1 +1,4 @@
 .env
+frontend/classroom-life-main/node_modules/
+frontend/classroom-life-main/dist/
+frontend/classroom-life-main/.vite
