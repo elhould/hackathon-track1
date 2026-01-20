@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import OpenAI from 'openai';
@@ -12,6 +12,10 @@ import { buildTutorMessages, buildPredictionPrompt } from './tutorPrompts.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Load .env from project root (3 levels up from server directory)
+const rootEnvPath = path.join(__dirname, '../../../.env');
+dotenv.config({ path: rootEnvPath });
 
 const app = express();
 const PORT = process.env.PORT || 3001;
